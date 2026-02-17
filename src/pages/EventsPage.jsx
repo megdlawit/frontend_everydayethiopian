@@ -40,7 +40,8 @@ const RATING_RANGES = [
 
 // Helper function to get full image URL
 const getImageUrl = (url) => {
-  if (!url) return "/Uploads/placeholder-image.jpg";
+  const placeholder = `${backend_url}/Uploads/placeholder-image.jpg`;
+  if (!url) return placeholder;
   return url.startsWith("http") ? url : `${backend_url}${url}`;
 };
 
@@ -408,7 +409,8 @@ const EventsPage = () => {
                                 alt={event.name || "Event"}
                                 className="w-20 h-16 object-cover rounded-md"
                                 onError={(e) => {
-                                  e.target.src = "/Uploads/placeholder-image.jpg";
+                                  e.target.onerror = null;
+                                  e.target.src = getImageUrl(null);
                                 }}
                               />
                               <div className="absolute inset-0 bg-[#CA8A0A] bg-opacity-60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
