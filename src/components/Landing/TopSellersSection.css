@@ -1,0 +1,176 @@
+.section-wrapper {
+  position: relative;
+  margin-top: clamp(-4rem, -8vw, -9rem); 
+  padding: 0 1rem;
+  padding-bottom: 2rem; 
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+}
+
+.section-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #eaeaea;
+  z-index: -1;
+}
+
+.gradient-box.main-container {
+  background: radial-gradient(circle at center, #41666A 0%, #1C3B3E 100%);
+  border-radius: 20px;
+  padding: 0.2rem 0.2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 clamp(0.5rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem); /* Responsive margins */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Vertically centers content within the card */
+  gap: 0.5rem;
+  height: 70vh; /* Fixed height for desktop */
+  min-height: 400px; /* Minimum height to prevent too small on mobile */
+}
+
+.feather-pattern {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2px, 1vw, 5px); /* Responsive gap */
+  padding: clamp(5px, 2vw, 10px) 0;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
+}
+
+.feather-icon {
+  width: clamp(20px, 4vw, 50px); /* Scales from 20px mobile to 50px desktop */
+  height: auto;
+  opacity: 0.9;
+  filter: brightness(1.2);
+}
+
+.sellers-display {
+  position: relative;
+  height: clamp(150px, 25vw, 220px); /* Responsive height */
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  margin-top: clamp(1rem, 4vw, 2.5rem); /* Responsive margin-top */
+}
+
+.sellers-row {
+  position: relative;
+  height: clamp(120px, 20vw, 180px); /* Responsive row height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.seller-circle {
+  position: absolute;
+  width: clamp(80px, 12vw, 120px); /* Responsive base size */
+  height: clamp(80px, 12vw, 120px);
+  border-radius: 50%;
+  border: 3px solid #FFE180;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  padding: clamp(4px, 1vw, 8px); /* Responsive padding */
+  box-sizing: border-box;
+}
+
+.seller-circle.active {
+  width: clamp(120px, 18vw, 180px); /* Responsive active size */
+  height: clamp(120px, 18vw, 180px);
+  border: 4px solid #FFB800;
+  z-index: 2;
+  padding: clamp(6px, 1.5vw, 10px);
+}
+
+.seller-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.seller-title {
+  text-align: center;
+  color: white;
+  font-family: 'Quesha';
+  font-size: clamp(1.5rem, 6vw, 3.5rem); /* Scales from 1.5rem mobile to 3.5rem desktop */
+  margin: 0;
+  font-weight: normal;
+  letter-spacing: 1px;
+  padding-top: 0.2rem;
+  line-height: 1.2; /* Better for large text */
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.seller-circle {
+  animation: slideIn 0.5s ease-out;
+}
+
+.seller-circle:hover {
+  transform: scale(1.05);
+}
+
+.seller-circle.active:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+@media (max-width: 767px) {
+  .section-wrapper {
+    padding-bottom: 0rem;
+    margin-top: clamp(-9rem, -16vw, -12rem); 
+  }
+
+  .gradient-box.main-container {
+    margin-bottom: 0rem; 
+    border-radius: 16px; 
+    height: 50vh; 
+    min-height: 300px;
+  }
+
+  .feather-pattern {
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+
+  .sellers-display {
+    margin-top: 1rem;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gradient-box.main-container {
+    margin: 0 1.5rem 1.5rem;
+  }
+}

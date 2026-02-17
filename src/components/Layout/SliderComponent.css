@@ -1,0 +1,134 @@
+body {
+  font-family: 'lato', sans-serif;
+}
+/* Slider Container */
+.slider-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 4em;
+   background-color: #ffffff; 
+}
+
+/* Title Styles */
+.main-title {
+   font-size: 2.5rem;
+   font-weight: 700;
+   color: #013046;
+   margin-bottom: 10px;
+   text-align: center;
+}
+
+.category-title {
+   font-size: 3.8rem;
+   font-weight: 700;
+   color: #013046;
+   text-transform: uppercase;
+   margin-top: 70px;
+}
+.highlight {
+   color: #FAC50C; /* Highlight color */
+ }
+/* Description Styles */
+.category-description {
+   font-size: 1.1rem;
+   color: #6c757d;
+   margin-bottom: 20px;
+   width: 25em;
+   line-height: 1.6;
+}
+
+/* Slider Item Styles */
+.slider-item {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 2em;
+}
+
+.slider-content {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   padding: 20px;
+}
+
+/* Seller Grid Styles */
+.seller-grid {
+   display: flex;
+   flex-wrap: wrap; /* Allow items to wrap into multiple rows */
+   justify-content: center; /* Center the items */
+   gap: 1em; /* Space between items */
+}
+
+.seller-card {
+   text-align: center;
+   flex: 0 0 calc(23.33% - 0.9em); /* Each card takes up 1/3 of the width minus the gap */
+ 
+}
+
+.seller-image {
+   width: 250px;
+   height: 200px;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Seller Name Overlay */
+.seller-image-container {
+   position: relative; /* Position relative for absolute positioning of overlay */
+}
+
+.seller-name-overlay {
+   position: absolute;
+   bottom: 0; 
+   left: 0;
+   right: 0;
+   top: 0;
+   background: rgba(0, 0, 0, 0.345); /* Semi-transparent background */
+   color: white; /* Text color */
+   text-align: center; /* Center the text */
+   opacity: 0; /* Initially hidden */
+   transition: opacity 0.3s; /* Smooth transition */
+}
+
+.seller-image-container:hover .seller-name-overlay {
+   opacity: 1; /* Show overlay on hover */
+}
+
+/* Custom Arrow Styles */
+.custom-arrow {
+   font-size: 25px; /* Adjust size as needed */
+   color: #fff; /* Change color */
+   background: #FAC50C; /* Semi-transparent background */
+   border-radius: 50%; /* Rounded shape */
+   width: 40px; /* Width of the arrow button */
+   height: 40px; /* Height of the arrow button */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   position: absolute;
+   z-index: 1;
+}
+
+.next {
+   bottom: 10px; /* Positioning for down arrow */
+   left: 25%; /* Center horizontally */
+   transform: translateX(-50%); /* Adjust for centering */
+}
+
+.prev {
+   top: 10px; /* Positioning for up arrow */
+   left: 25%; /* Center horizontally */
+   transform: translateX(-50%); /* Adjust for centering */
+}
+
+.custom-arrow:hover {
+   background-color: #d5d5d5; /* Change background on hover */
+}
+
+/* Additional Spacing Adjustments */
+.slider-container h1, .slider-container h2 {
+   margin-bottom: 20px;
+}

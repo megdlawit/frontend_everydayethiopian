@@ -1,0 +1,204 @@
+/* ---------------- Base Desktop Styles (original look stays exactly same) ---------------- */
+.feature-wrapper {
+  background-color: #0b1a1c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rem 8rem;
+}
+
+.feature-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.feature-image {
+  border-radius: 16px;
+  width: 380px;
+  height: auto;
+}
+
+.feature-quote-card {
+  position: absolute;
+  bottom: -60px;
+  left: 10rem;
+  background: linear-gradient(to top, #418990, #13282a);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #035855;
+  width: 380px;
+  color: white;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.quote {
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.author {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 200;
+  opacity: 0.9;
+}
+
+.open-gif {
+  position: absolute;
+  right: -200px;
+  bottom: -150px;
+  width: 150px;
+  height: 150px;
+}
+
+.feature-right {
+  color: white;
+  text-align: center;
+  margin-left: 5rem;
+}
+
+.feature-count {
+  font-size: 200px;
+  font-weight: 900;
+  background: linear-gradient(to bottom, #01b2ad, #030f10);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 0.9;
+}
+
+.feature-label {
+  font-family: "Quesha";
+  font-size: 3.5rem;
+  color: #d9ede1;
+  letter-spacing: 2px;
+}
+
+/* ---------------- Responsive Fixes ---------------- */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .feature-wrapper {
+    flex-direction: column;
+    padding: 6rem 3rem;
+    text-align: center;
+  }
+
+  .feature-left {
+    align-items: center;
+  }
+
+  .feature-image {
+    width: 320px;
+  }
+
+  .feature-quote-card {
+    position: relative;
+    left: 0;
+    bottom: -30px;
+    width: 90%;
+    margin-top: 1rem;
+  }
+
+  .open-gif {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin-top: 2rem;
+    width: 100px;
+    height: 100px;
+  }
+
+  .feature-right {
+    margin-left: 0;
+    margin-top: 6rem;
+  }
+
+  .feature-count {
+    font-size: 150px;
+  }
+
+  .feature-label {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .feature-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 1.5rem;
+  }
+
+  .feature-left {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* ✅ Removes extra space */
+  }
+
+  .feature-image {
+    width: 90%;
+    max-width: 300px;
+    margin-bottom: 0; /* ✅ Ensures no bottom margin */
+  }
+
+  .feature-quote-card {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    bottom: 0;
+    margin-top: -0.5rem; /* ✅ Slight overlap if needed */
+  }
+
+  .open-gif {
+    width: 70px;
+    height: 70px;
+    margin-top: 1rem;
+  }
+
+  .feature-count {
+    font-size: 120px;
+  }
+
+  .feature-label {
+    font-size: 2rem;
+  }
+}
+
+
+/* Extra Small Devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .feature-wrapper {
+    padding: 3rem 1rem;
+  }
+
+  .feature-count {
+    font-size: 90px;
+  }
+
+  .feature-label {
+    font-size: 1.7rem;
+  }
+
+  .quote {
+    font-size: 0.85rem;
+  }
+
+  .author {
+    font-size: 0.75rem;
+  }
+
+  .open-gif {
+    width: 100px;
+    height: 100px;
+    margin-left: 14rem;
+    margin-top: -2.5rem;
+  }
+}

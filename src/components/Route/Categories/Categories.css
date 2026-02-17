@@ -1,0 +1,268 @@
+.section-wrapper {
+  position: relative;
+  padding: 0 1rem;
+  padding-bottom: 4rem;
+  background: transparent;
+}
+
+.section-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #eaeaea;
+  z-index: -1;
+}
+
+.gradient-box.main-container {
+  background: radial-gradient(circle at center, #41666A 0%, #1C3B3E 100%);
+  border-radius: 20px;
+  padding: 0.2rem 0.2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 500px;
+}
+
+.sellers-display {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.sellers-row {
+  position: relative;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.seller-circle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #FFE180;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  transform-origin: center;
+  padding: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.seller-circle.active {
+  width: 180px;
+  height: 180px;
+  border: 4px solid #FFB800;
+  z-index: 2;
+  padding: 10px;
+}
+
+.seller-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.title-second-line {
+  display: block;
+  margin-left: -6rem; 
+}
+
+.loading-text {
+  color: white;
+  font-family: "Avenir LT Std", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.seller-circle {
+  animation: slideIn 0.5s ease-out;
+}
+
+.seller-circle:hover {
+  transform: scale(1.05);
+}
+
+.seller-circle.active:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .section-wrapper {
+    padding: 0 0rem; /* Remove side padding for full width */
+    padding-bottom: 2rem;
+    margin-top: -2rem;
+  }
+
+  .gradient-box.main-container {
+    margin: 0 0rem 1rem; /* Remove side margins for full width */
+    padding: 1rem 0.5rem;
+    min-height: 400px; /* Increased height for mobile */
+    border-radius: 0px; /* Remove border radius for full width */
+    width: 100%;
+    max-width: 100%; /* Full width on mobile */
+  }
+
+  .seller-title-mobile {
+    font-family: "Quesha", sans-serif; /* Quesha font for mobile */
+    font-size: 1.8rem;
+    color: white;
+    text-align: center;
+    margin: 0.5rem 0 1rem 0;
+    width: 100%;
+  }
+
+  .title-second-line-mobile {
+    display: block;
+    margin-left: 0;
+    text-align: center;
+    font-family: "Quesha", sans-serif; /* Quesha font for mobile */
+  }
+
+  .sellers-display {
+    height: 180px; /* Increased height for better spacing */
+    margin-top: 0.5rem;
+  }
+
+  .sellers-row {
+    height: 160px; /* Increased height for better spacing */
+  }
+
+  .seller-circle {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    border: 2px solid #FFE180;
+  }
+
+  .seller-circle.active {
+    width: 120px;
+    height: 120px;
+    padding: 6px;
+    border: 3px solid #FFB800;
+  }
+
+  .category-title-mobile {
+    color: white;
+    font-family: "Quesha", sans-serif; /* Quesha font for mobile */
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    position: absolute;
+    bottom: -45px; /* Adjusted position for better visibility */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px; /* Increased max width */
+    padding: 0 10px;
+  }
+
+  .loading-text {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    font-family: "Quesha", sans-serif; /* Quesha font for mobile */
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-wrapper {
+    padding: 0 1rem;
+    padding-bottom: 3rem;
+  }
+
+  .gradient-box.main-container {
+    margin: 0 2rem 1.5rem;
+    min-height: 450px;
+  }
+
+  .sellers-display {
+    height: 200px;
+  }
+
+  .sellers-row {
+    height: 170px;
+  }
+
+  .seller-circle {
+    width: 110px;
+    height: 110px;
+  }
+
+  .seller-circle.active {
+    width: 160px;
+    height: 160px;
+  }
+
+  .seller-title-mobile {
+    display: none;
+  }
+}
+
+/* Desktop Styles (unchanged) */
+@media (min-width: 1024px) {
+  .seller-title-mobile {
+    display: none;
+  }
+  
+  .category-title-mobile {
+    display: none;
+  }
+}
+
+/* Hide mobile elements on desktop */
+@media (min-width: 768px) {
+  .seller-title-mobile,
+  .category-title-mobile {
+    display: none;
+  }
+}
+
+/* Hide desktop elements on mobile */
+@media (max-width: 767px) {
+  .seller-title,
+  .category-title {
+    display: none;
+  }
+}
+
+/* Ensure Quesha font is applied to all text elements */
+.seller-title,
+.seller-title-mobile,
+.category-title,
+.category-title-mobile,
+.loading-text {
+  font-family: "Quesha", "Avenir LT Std", sans-serif;
+}
