@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
@@ -6,9 +6,7 @@ import { toast } from "react-toastify";
 export const getAllDeliveries = () => async (dispatch) => {
   try {
     dispatch({ type: "GetAllDeliveriesRequest" });
-    const { data } = await axios.get(`${server}/delivery/all`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/delivery/all`);
     dispatch({
       type: "GetAllDeliveriesSuccess",
       payload: data.deliveries,
@@ -25,10 +23,7 @@ export const loadMessages = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadMessagesRequest" });
     const token = localStorage.getItem("authToken");
-    const { data } = await axios.get(`${server}/delivery/messages`, {
-      withCredentials: true,
-      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-    });
+    const { data } = await api.get(`/delivery/messages`, { headers: token ? { Authorization: `Bearer ${token}` } : undefined });
     dispatch({
       type: "LoadMessagesSuccess",
       payload: data.messages,
@@ -45,9 +40,7 @@ export const loadMessages = () => async (dispatch) => {
 export const createDelivery = (deliveryData) => async (dispatch) => {
   try {
     dispatch({ type: "CreateDeliveryRequest" });
-    const { data } = await axios.post(`${server}/delivery/create`, deliveryData, {
-      withCredentials: true,
-    });
+    const { data } = await api.post(`/delivery/create`, deliveryData);
     dispatch({
       type: "CreateDeliverySuccess",
       payload: data.delivery,
@@ -64,9 +57,7 @@ export const createDelivery = (deliveryData) => async (dispatch) => {
 export const deleteDelivery = (id) => async (dispatch) => {
   try {
     dispatch({ type: "DeleteDeliveryRequest" });
-    const { data } = await axios.delete(`${server}/delivery/${id}`, {
-      withCredentials: true,
-    });
+    const { data } = await api.delete(`/delivery/${id}`);
     dispatch({
       type: "DeleteDeliverySuccess",
       payload: data.message,
@@ -83,9 +74,7 @@ export const deleteDelivery = (id) => async (dispatch) => {
 export const signupDelivery = (deliveryData) => async (dispatch) => {
   try {
     dispatch({ type: "SignupDeliveryRequest" });
-    const { data } = await axios.post(`${server}/delivery/signup`, deliveryData, {
-      withCredentials: true,
-    });
+    const { data } = await api.post(`/delivery/signup`, deliveryData);
     dispatch({
       type: "SignupDeliverySuccess",
       payload: data.message,
@@ -102,11 +91,7 @@ export const signupDelivery = (deliveryData) => async (dispatch) => {
 export const activateDelivery = (activationToken) => async (dispatch) => {
   try {
     dispatch({ type: "ActivateDeliveryRequest" });
-    const { data } = await axios.post(
-      `${server}/delivery/activation`,
-      { activation_token: activationToken },
-      { withCredentials: true }
-    );
+    const { data } = await api.post(`/delivery/activation`, { activation_token: activationToken });
     dispatch({
       type: "ActivateDeliverySuccess",
       payload: data.message,
@@ -130,10 +115,7 @@ export const loadDeliveryUser = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadDeliveryUserRequest" });
     const token = localStorage.getItem("authToken");
-    const { data } = await axios.get(`${server}/delivery/getuser`, {
-      withCredentials: true,
-      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-    });
+    const { data } = await api.get(`/delivery/getuser`, { headers: token ? { Authorization: `Bearer ${token}` } : undefined });
     dispatch({
       type: "LoadDeliveryUserSuccess",
       payload: data.delivery,
@@ -158,10 +140,7 @@ export const loadAssignedOrders = () => async (dispatch) => {
   try {
     dispatch({ type: "LoadAssignedOrdersRequest" });
     const token = localStorage.getItem("authToken");
-    const { data } = await axios.get(`${server}/delivery/assigned-orders`, {
-      withCredentials: true,
-      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-    });
+    const { data } = await api.get(`/delivery/assigned-orders`, { headers: token ? { Authorization: `Bearer ${token}` } : undefined });
     dispatch({
       type: "LoadAssignedOrdersSuccess",
       payload: data.assignedOrders,
@@ -179,14 +158,7 @@ export const updateDeliveryRequest = (id, status) => async (dispatch) => {
   try {
     dispatch({ type: "UpdateDeliveryRequest" });
     const token = localStorage.getItem("authToken");
-    const { data } = await axios.put(
-      `${server}/delivery/request/${id}`,
-      { status },
-      {
-        withCredentials: true,
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-      }
-    );
+    const { data } = await api.put(`/delivery/request/${id}`, { status }, { headers: token ? { Authorization: `Bearer ${token}` } : undefined });
     dispatch({
       type: "UpdateDeliverySuccess",
       payload: { id, status, message: data.message },
@@ -207,14 +179,7 @@ export const completeDelivery = (id) => async (dispatch) => {
   try {
     dispatch({ type: "CompleteDeliveryRequest" });
     const token = localStorage.getItem("authToken");
-    const { data } = await axios.put(
-      `${server}/delivery/complete/${id}`,
-      {},
-      {
-        withCredentials: true,
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-      }
-    );
+    const { data } = await api.put(`/delivery/complete/${id}`, {}, { headers: token ? { Authorization: `Bearer ${token}` } : undefined });
     dispatch({
       type: "CompleteDeliverySuccess",
       payload: { id, delivery: data.delivery, message: data.message },

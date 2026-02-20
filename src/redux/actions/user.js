@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 // load user
@@ -7,9 +7,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: "LoadUserRequest",
     });
-    const { data } = await axios.get(`${server}/user/getuser`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/user/getuser`);
     dispatch({
       type: "LoadUserSuccess",
       payload: {
@@ -35,9 +33,7 @@ export const loadSeller = () => async (dispatch) => {
     dispatch({
       type: "LoadSellerRequest",
     });
-    const { data } = await axios.get(`${server}/shop/getSeller`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/shop/getSeller`);
     dispatch({
       type: "LoadSellerSuccess",
       payload: data.seller,
@@ -57,16 +53,7 @@ export const updateUserInformation = (name, email, phoneNumber) => async (dispat
       type: "updateUserInfoRequest",
     });
 
-    const { data } = await axios.put(
-      `${server}/user/update-user-info`,
-      { name, email, phoneNumber }, // Fixed parameter order
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const { data } = await api.put(`/user/update-user-info`, { name, email, phoneNumber });
 
     dispatch({
       type: "updateUserInfoSuccess",
@@ -120,11 +107,7 @@ export const updateUserAddress = (country, city, address1, addressType) => async
     dispatch({
       type: "updateUserAddressRequest",
     });
-    const { data } = await axios.put(
-      `${server}/user/update-user-addresses`,
-      { country, city, address1, addressType },
-      { withCredentials: true }
-    );
+    const { data } = await api.put(`/user/update-user-addresses`, { country, city, address1, addressType });
     dispatch({
       type: "updateUserAddressSuccess",
       payload: {
@@ -148,10 +131,7 @@ export const deleteUserAddress = (id) => async (dispatch) => {
       type: "deleteUserAddressRequest",
     });
 
-    const { data } = await axios.delete(
-      `${server}/user/delete-user-address/${id}`,
-      { withCredentials: true }
-    );
+    const { data } = await api.delete(`/user/delete-user-address/${id}`);
 
     dispatch({
       type: "deleteUserAddressSuccess",
@@ -175,9 +155,7 @@ export const getAllUsers = () => async (dispatch) => {
       type: "getAllUsersRequest",
     });
 
-    const { data } = await axios.get(`${server}/user/admin-all-users`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/user/admin-all-users`);
 
     dispatch({
       type: "getAllUsersSuccess",
@@ -198,7 +176,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       type: "ForgotPasswordRequest",
     });
 
-    const { data } = await axios.post(`${server}/user/password/forgot`, { email });
+    const { data } = await api.post(`/user/password/forgot`, { email });
 
     dispatch({
       type: "ForgotPasswordSuccess",
@@ -239,7 +217,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 // Example resetPassword action
 export const resetPassword = (token, password, confirmPassword) => async (dispatch) => {
   try {
-    const response = await axios.put(`${server}/user/password/reset/${token}`, {
+    const response = await api.put(`/user/password/reset/${token}`, {
       password,
       confirmPassword,
     });
@@ -260,7 +238,7 @@ export const activateUser = (activationToken) => async (dispatch) => {
   try {
     dispatch({ type: "ActivateUserRequest" });
 
-    const { data } = await axios.post(`${server}/user/activation`, {
+    const { data } = await api.post(`/user/activation`, {
       activation_token: activationToken,
     });
 
@@ -288,9 +266,8 @@ export const signupUser = (name, email, password, avatar) => async (dispatch) =>
       formData.append("avatar", avatar);
     }
 
-    const { data } = await axios.post(`${server}/user/create-user`, formData, {
+    const { data } = await api.post(`/user/create-user`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
-      withCredentials: true, // Include credentials if needed
     });
 
     dispatch({

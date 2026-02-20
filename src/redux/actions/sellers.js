@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 
 // load seller
@@ -8,9 +8,7 @@ export const loadSeller = () => async (dispatch) => {
       type: "LoadSellerRequest",
     });
 
-    const { data } = await axios.get(`${server}/shop/getSeller`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/shop/getSeller`);
     dispatch({
       type: "LoadSellerSuccess",
       payload: data.seller,
@@ -30,9 +28,7 @@ export const getAllSellers = () => async (dispatch) => {
       type: "getAllSellersRequest",
     });
 
-    const { data } = await axios.get(`${server}/shop/admin-all-sellers`, {
-      withCredentials: true,
-    });
+    const { data } = await api.get(`/shop/admin-all-sellers`);
 
     dispatch({
       type: "getAllSellersSuccess",
@@ -54,7 +50,7 @@ export const clearErrors = () => async (dispatch) => {
 // logout seller
 export const logoutSeller = () => async (dispatch) => {
   try {
-    await axios.get(`${server}/shop/logout`, { withCredentials: true });
+    await api.get(`/shop/logout`);
     dispatch({ type: "LogoutSeller" });
   } catch (error) {
     // Optionally handle error

@@ -71,6 +71,7 @@ import DeliveryProtectedRoute from "./routes/DeliveryProtectedRoute";
 import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
 import axios from "axios";
+import api from "./utils/api";
 import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -138,8 +139,12 @@ const App = () => {
     );
   };
   async function getStripeApikey() {
-    const { data } = await axios.get(`${server}/payment/stripeapikey`);
-    setStripeApiKey(data.stripeApikey);
+    try {
+      const { data } = await api.get(`/payment/stripeapikey`);
+      setStripeApiKey(data?.stripeApikey || "");
+    } catch (err) {
+      console.error("Failed to load Stripe API key:", err);
+    }
   }
 
   useEffect(() => {
@@ -155,7 +160,7 @@ const App = () => {
     
     <BrowserRouter>
       {stripeApikey && (
-        <Elements stripe={loadStripe(stripeApikey)}>
+        <Elements stripe={React.useMemo(() => (stripeApikey ? loadStripe(stripeApikey) : null), [stripeApikey])}>
           <Routes>
             <Route
               path="/payment"
