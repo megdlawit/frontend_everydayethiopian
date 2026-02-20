@@ -40,7 +40,9 @@ const RATING_RANGES = [
 // Helper function to get full image URL
 const getImageUrl = (url) => {
   if (!url) return "/Uploads/placeholder-image.jpg";
-  return url.startsWith("http") ? url : `${backend_url}${url}`;
+  if (url.startsWith("http")) return url;
+  // Ensure single slash between backend_url and url
+  return `${backend_url}${url.startsWith("/") ? "" : "/"}${url}`;
 };
 
 const BestSellingPage = () => {
