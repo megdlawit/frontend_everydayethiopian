@@ -107,13 +107,13 @@ const ProductCard = ({ data, hideShopLink = false }) => {
                   ? (data.images[0].url.startsWith("blob:") || data.images[0].url.startsWith("http")
                       ? data.images[0].url
                       : `${backend_url}${data.images[0].url}`)
-                  : "/Uploads/placeholder-image.jpg"
+                  : "/placeholder-image.png"
               }
               alt={data.name || "Product"}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "/Uploads/placeholder-image.jpg";
+                e.target.src = "/placeholder-image.png";
               }}
             />
 

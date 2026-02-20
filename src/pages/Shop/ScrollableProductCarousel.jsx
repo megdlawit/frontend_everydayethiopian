@@ -8,7 +8,7 @@ const ScrollableProductCarousel = () => {
 
   // Helper function to get full image URL
   const getImageUrl = (url) => {
-    if (!url) return "/uploads/placeholder-image.jpg";
+    if (!url) return "/placeholder-image.png";
     return url.startsWith("http") ? url : `${backend_url}${url}`;
   };
 
@@ -58,7 +58,7 @@ const ScrollableProductCarousel = () => {
               className="w-full h-[200px] object-cover rounded-lg"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "/uploads/placeholder-image.jpg"; // Fallback
+                e.target.src = "/placeholder-image.png"; // Fallback
               }}
             />
             {/* Hover Overlay */}

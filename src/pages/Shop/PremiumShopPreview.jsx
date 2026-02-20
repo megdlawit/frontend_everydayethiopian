@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 // Helper function to get full image URL
 const getImageUrl = (url) => {
-  if (!url) return "/uploads/placeholder-image.jpg";
+  if (!url) return "/placeholder-image.png";
   return url.startsWith("http") ? url : `${backend_url}${url}`;
 };
 
@@ -70,7 +70,7 @@ const PremiumShopPreview = () => {
   };
 
   const handleImageError = (e) => {
-    e.target.src = "/uploads/placeholder-image.jpg";
+    e.target.src = "/placeholder-image.png";
   };
 
   if (isLoading) {

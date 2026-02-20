@@ -27,7 +27,7 @@ const Categories = () => {
 
   // Helper function to get full image URL
   const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return "/placeholder-image.jpg";
+    if (!imageUrl) return "/placeholder-image.png";
     return imageUrl.startsWith('http') ? imageUrl : `${backend_url}${imageUrl}`;
   };
 
@@ -90,7 +90,7 @@ const Categories = () => {
                       className="seller-image"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = "/placeholder-image.jpg";
+                        e.target.src = "/placeholder-image.png";
                       }}
                     />
                   </div>

@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoadUserFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to load user",
     });
   }
 };
@@ -41,7 +41,7 @@ export const loadSeller = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoadSellerFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to load seller",
     });
   }
 };
@@ -143,7 +143,7 @@ export const deleteUserAddress = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "deleteUserAddressFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to delete address",
     });
   }
 };
@@ -164,7 +164,7 @@ export const getAllUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllUsersFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to get users",
     });
   }
 };
@@ -185,7 +185,7 @@ export const forgotPassword = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "ForgotPasswordFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to request password reset",
     });
   }
 };
@@ -228,7 +228,7 @@ export const resetPassword = (token, password, confirmPassword) => async (dispat
   } catch (error) {
     dispatch({
       type: "ResetPasswordFail",
-      payload: error.response ? error.response.data.message : error.message,
+      payload: error.response?.data?.message || error.message || "Failed to reset password",
     });
     throw error; // For handling in component
   }
@@ -249,7 +249,7 @@ export const activateUser = (activationToken) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "ActivateUserFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message || "Failed to activate user",
     });
   }
 };
@@ -288,7 +288,7 @@ export const signupUser = (name, email, password, avatar) => async (dispatch) =>
   } catch (error) {
     dispatch({
       type: "LoadUserFail",
-      payload: error.response ? error.response.data.message : error.message,
+      payload: error.response?.data?.message || error.message || "Failed to signup",
     });
   }
 };

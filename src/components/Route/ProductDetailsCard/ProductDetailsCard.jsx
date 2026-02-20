@@ -22,7 +22,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
   // Helper function to get full image URL
   const getImageUrl = (url) => {
-    if (!url) return "/uploads/placeholder-image.jpg";
+    if (!url) return "/placeholder-image.png";
     return url.startsWith('http') ? url : `${backend_url}${url}`;
   };
 
@@ -125,7 +125,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   };
 
   const handleImageError = (e) => {
-    e.target.src = "/uploads/placeholder-image.jpg"; // Provide a default fallback image
+    e.target.src = "/placeholder-image.png"; // Provide a default fallback image
   };
 
   return (

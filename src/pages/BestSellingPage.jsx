@@ -39,7 +39,7 @@ const RATING_RANGES = [
 
 // Helper function to get full image URL
 const getImageUrl = (url) => {
-  if (!url) return "/Uploads/placeholder-image.jpg";
+  if (!url) return "/placeholder-image.png";
   if (url.startsWith("http")) return url;
   // Ensure single slash between backend_url and url
   return `${backend_url}${url.startsWith("/") ? "" : "/"}${url}`;
@@ -379,7 +379,7 @@ const BestSellingPage = () => {
                                 className="w-20 h-16 object-cover rounded-md"
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = "/Uploads/placeholder-image.jpg";
+                                  e.target.src = "/placeholder-image.png";
                                 }}
                               />
                               <div className="absolute inset-0 bg-[#CA8A0A] bg-opacity-60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
@@ -545,7 +545,7 @@ const BestSellingPage = () => {
                           className="w-[300px] h-[100px] object-cover rounded-md"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = "/Uploads/placeholder-image.jpg";
+                            e.target.src = "/placeholder-image.png";
                           }}
                         />
                         <div className="absolute inset-0 bg-[#CA8A0A] bg-opacity-60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
