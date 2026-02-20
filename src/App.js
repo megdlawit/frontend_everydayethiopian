@@ -156,11 +156,14 @@ const App = () => {
     getStripeApikey();
   }, []);
 
+  // Memoize Stripe load promise outside of JSX to satisfy hooks rules
+  const stripePromise = React.useMemo(() => (stripeApikey ? loadStripe(stripeApikey) : null), [stripeApikey]);
+
   return (
     
     <BrowserRouter>
       {stripeApikey && (
-        <Elements stripe={React.useMemo(() => (stripeApikey ? loadStripe(stripeApikey) : null), [stripeApikey])}>
+        <Elements stripe={stripePromise}>
           <Routes>
             <Route
               path="/payment"
