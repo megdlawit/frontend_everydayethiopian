@@ -12,7 +12,7 @@ import { TbAddressBook } from "react-icons/tb";
 import { RxPerson } from "react-icons/rx";
 import { FiUserX } from "react-icons/fi";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";

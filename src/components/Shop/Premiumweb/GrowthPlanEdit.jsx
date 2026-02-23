@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../../../utils/api';
 import { toast } from 'react-toastify';
 import { FaCamera } from 'react-icons/fa';
 import Toast from "../../Toast"; 
@@ -37,7 +37,7 @@ const GrowthPlanEdit = () => {
     const formData = new FormData();
     formData.append('avatar', file);
     try {
-      const response = await axios.put(`${server}/shop/update-shop-avatar`, formData, {
+      const response = await api.put(`${server}/shop/update-shop-avatar`, formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' },
       });

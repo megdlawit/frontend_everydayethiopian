@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import api from "../../../utils/api";
 import { server, backend_url } from "../../../server";
 import Footer from "../../../components/Layout/Footer";
 import { FaPen } from "react-icons/fa";
@@ -122,7 +122,7 @@ const PremiumEdit = () => {
     if (type === "shop") {
       formData.append("avatar", file);
       try {
-        const res = await axios.put(`${server}/shop/update-shop-avatar`, formData, {
+        const res = await api.put(`${server}/shop/update-shop-avatar`, formData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -232,7 +232,7 @@ const PremiumEdit = () => {
       shopFormData.append("address", shopData.address);
       shopFormData.append("phoneNumber", shopData.contact.phone);
 
-      await axios.put(`${server}/shop/update-seller-info`, shopFormData, {
+      await api.put(`${server}/shop/update-seller-info`, shopFormData, {
         headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });

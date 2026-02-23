@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { server } from "../../server";
-import axios from "axios";
+import api from "../../utils/api";
 import { FaEnvelope } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";

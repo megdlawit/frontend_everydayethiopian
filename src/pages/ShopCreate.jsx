@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { server } from "../server";
-import axios from 'axios';
+import api from '../utils/api';
 import { toast } from 'react-toastify';
 import Toast from "../components/Toast"; 
 import logo from "../Assests/images/logo.png";
@@ -74,7 +74,7 @@ const ShopCreatePage = () => {
     }
 
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `${server}/shop/update-plan`,
         { template: selectedTemplate },
         {

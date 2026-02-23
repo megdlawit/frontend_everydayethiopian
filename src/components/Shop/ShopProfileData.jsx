@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { getAllEventsShop } from "../../redux/actions/event";
 import { server, backend_url } from "../../server";
-import axios from "axios";
+import api from "../../utils/api";
 import Footer from "../../components/Layout/Footer";
 import ProductCard from "../Route/ProductCard/ProductCard";
 import EventCard from "../Events/EventCard";
@@ -47,7 +47,7 @@ const ShopProfileData = ({ isOwner }) => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const shopResponse = await axios.get(`${server}/shop/get-shop-info/${id}`);
+        const shopResponse = await api.get(`${server}/shop/get-shop-info/${id}`);
         setData(shopResponse.data.shop);
         dispatch(getAllProductsShop(id));
         dispatch(getAllEventsShop(id));

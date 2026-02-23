@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Toast from "../../../components/Toast"; // Adjust the path to your Toast component as needed
 import { addTocart } from "../../../redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../../../redux/actions/wishlist";
-import axios from "axios";
+import api from "../../../utils/api";
 import { server, backend_url } from "../../../server";
 
 const ProductDetailsCard = ({ setOpen, data }) => {

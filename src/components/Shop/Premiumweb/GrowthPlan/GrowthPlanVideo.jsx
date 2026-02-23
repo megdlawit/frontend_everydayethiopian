@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../../Toast"; 
 import ProductDetailsCard from "../../../Products/ProductDetails";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { backend_url } from "../../../../server";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

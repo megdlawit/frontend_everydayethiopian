@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAllProductsShop, deleteProduct, updateProduct } from "../../redux/actions/product";
 import Loader from "../Layout/Loader";
 import { Button, Modal, TextField, Box, Input, createTheme, ThemeProvider } from "@material-ui/core";
-import axios from "axios";
+import api from "../../utils/api";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast"; 
 import Pagination from "../Pagination";

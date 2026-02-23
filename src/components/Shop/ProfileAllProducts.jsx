@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 import Loader from "../Layout/Loader";
 import Footer from "../Layout/Footer";
 import ProductCard from "../Route/ProductCard/ProductCard";
@@ -91,7 +91,7 @@ const ProfileAllProducts = () => {
     const fetchShopData = async () => {
       try {
         setIsLoadingShop(true);
-        const res = await axios.get(`${server}/shop/get-shop-info/${id}`);
+        const res = await api.get(`${server}/shop/get-shop-info/${id}`);
         if (res.data && res.data.shop) {
           setShopData(res.data.shop);
         } else {
@@ -108,7 +108,7 @@ const ProfileAllProducts = () => {
     const fetchShopProducts = async () => {
       try {
         setIsLoadingProducts(true);
-        const res = await axios.get(`${server}/product/get-all-products-shop/${id}`);
+        const res = await api.get(`${server}/product/get-all-products-shop/${id}`);
         setProducts(res.data.products || []);
         showToast("success", "Products Success", "Products fetched successfully!");
       } catch (err) {
@@ -121,7 +121,7 @@ const ProfileAllProducts = () => {
 
     const fetchCategories = async () => {
       try {
-        const res = await axios.get(`${server}/category/get-all-categories`);
+        const res = await api.get(`${server}/category/get-all-categories`);
         setCategories(res.data.categories || []);
       } catch (err) {
         console.error("Error fetching categories:", err);

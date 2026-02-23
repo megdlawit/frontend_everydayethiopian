@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { server } from "../../server";
@@ -43,7 +43,7 @@ const ShopInfo = ({ isOwner }) => {
   useEffect(() => {
     dispatch(getAllProductsShop(id));
     setIsLoading(true);
-    axios.get(`${server}/shop/get-shop-info/${id}`).then((res) => {
+    api.get(`${server}/shop/get-shop-info/${id}`).then((res) => {
      setData(res.data.shop);
      setIsLoading(false);
     }).catch((error) => {
@@ -54,7 +54,7 @@ const ShopInfo = ({ isOwner }) => {
   
 
   const logoutHandler = async () => {
-    axios.get(`${server}/shop/logout`,{
+    api.get(`${server}/shop/logout`,{
       withCredentials: true,
     });
     window.location.reload();

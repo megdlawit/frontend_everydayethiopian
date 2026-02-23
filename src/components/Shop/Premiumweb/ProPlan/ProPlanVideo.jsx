@@ -7,7 +7,7 @@ import { addTocart } from "../../../../redux/actions/cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../../Toast"; 
-import axios from "axios";
+import api from "../../../../utils/api";
 import { backend_url, server } from "../../../../server";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -52,7 +52,7 @@ const ProPlanVideo = ({ shopId, products: overrideProducts }) => {
     }
     const fetchProductsWithVideos = async () => {
       try {
-        const response = await axios.get(`${server}/product/get-products-with-videos`);
+        const response = await api.get(`${server}/product/get-products-with-videos`);
         let filteredProducts = response.data.products;
         if (shopId) {
           filteredProducts = filteredProducts.filter(

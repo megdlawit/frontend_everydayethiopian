@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import { server } from "../server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -41,7 +41,7 @@ const ForgotPasswordPage = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${server}/user/password/forgot`, { email });
+      const response = await api.post(`${server}/user/password/forgot`, { email });
       showToast("success", "Reset Email Sent", response.data.message || "Password reset email sent!");
       setEmail("");
     } catch (error) {

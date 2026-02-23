@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import { BiSearch } from "react-icons/bi";
 import { TiHeartFullOutline } from "react-icons/ti";

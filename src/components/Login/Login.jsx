@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast"; 

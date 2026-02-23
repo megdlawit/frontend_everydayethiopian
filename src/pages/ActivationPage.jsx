@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../utils/api";
 import { server } from "../server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +33,7 @@ const ActivationPage = () => {
   useEffect(() => {
     const activateAccount = async () => {
       try {
-        const res = await axios.get(`${server}/user/activation/${activation_token}`);
+        const res = await api.get(`${server}/user/activation/${activation_token}`);
         showToast("success", "Account Activated", res.data.message);
         navigate("/login");
       } catch (err) {

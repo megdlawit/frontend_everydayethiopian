@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiOutlineEye, AiOutlineEdit, AiOutlineClose } from "re
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/Toast"; // Adjust path as needed
-import axios from "axios";
+import api from "../../utils/api";
 import { server, backend_url } from "../../server";
 import Loader from "../Layout/Loader";
 import Pagination from "../Pagination";
@@ -54,7 +54,7 @@ const AllWithdraw = () => {
     const fetchWithdraws = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.get(`${server}/withdraw/get-all-withdraw-request`, {
+        const res = await api.get(`${server}/withdraw/get-all-withdraw-request`, {
           withCredentials: true,
         });
         setData(res.data.withdraws || []);
@@ -69,7 +69,7 @@ const AllWithdraw = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(
+      await api.put(
         `${server}/withdraw/update-withdraw-request/${withdrawData.id}`,
         { sellerId: withdrawData.shopId, status: withdrawStatus },
         { withCredentials: true }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import img from "../../../../Assests/images/bg.png";
 import HeroHeader from './HeroHeader';
 import HeroContent from './HeroContent';
-import axios from "axios";
+import api from "../../../../utils/api";
 import { server, backend_url } from "../../../../server";
 
 const GrowthPlanHero = ({ shop, onNav }) => {

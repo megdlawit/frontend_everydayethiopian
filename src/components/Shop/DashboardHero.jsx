@@ -14,7 +14,7 @@ import { Button, Modal } from "@material-ui/core";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from "chart.js";
 import { toast } from "react-toastify";
-import axios from "axios";
+import api from "../../utils/api";
 import { server, backend_url } from "../../server";
 import Ratings from "../Products/Ratings";
 import styles from "../../styles/styles";

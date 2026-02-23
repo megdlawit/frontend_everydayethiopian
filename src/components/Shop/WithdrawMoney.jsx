@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { RxCross1 } from "react-icons/rx";
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { loadSeller } from "../../redux/actions/user";
@@ -57,7 +57,7 @@ const WithdrawMoney = () => {
     const withdrawMethod = { ...bankInfo };
     setPaymentMethod(false);
     try {
-      await axios.put(
+      await api.put(
         `${server}/shop/update-payment-methods`,
         { withdrawMethod },
         { withCredentials: true }

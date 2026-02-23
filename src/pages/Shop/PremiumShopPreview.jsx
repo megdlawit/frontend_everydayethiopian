@@ -31,16 +31,12 @@ const PremiumShopPreview = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const shopResponse = await api.get(`${server}/shop/get-shop-info/${id}`);
-        if (shopResponse.error) {
-          console.error("Error fetching shop data:", shopResponse.error);
-        } else {
-          setShopData(shopResponse.data?.shop ?? {});
-        }
+        const { data } = await api.get(`${server}/shop/get-shop-info/${id}`);
+        setShopData(data?.shop ?? {});
         dispatch(getAllProductsShop(id));
         dispatch(getAllEventsShop(id));
       } catch (error) {
-        console.error("Unexpected error fetching shop data:", error);
+        console.error("Unexpected error fetching shop data:", error?.response?.data || error.message || error);
       } finally {
         setIsLoading(false);
       }

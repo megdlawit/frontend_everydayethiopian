@@ -8,15 +8,15 @@ export const createCategory = (data) => async (dispatch) => {
       type: "categoryCreateRequest",
     });
 
-    const res = await api.post(`${server}/category/create-category`, data);
-    if (res.error) {
-      dispatch({ type: "categoryCreateFail", payload: res.error.message || res.error });
+    const { data: resData } = await api.post(`${server}/category/create-category`, data);
+    if (!resData) {
+      dispatch({ type: "categoryCreateFail", payload: "No response data" });
       return;
     }
 
     dispatch({
       type: "categoryCreateSuccess",
-      payload: res.data.category,
+      payload: resData.category,
     });
   } catch (error) {
     dispatch({
@@ -37,15 +37,15 @@ export const getAllCategories = () => async (dispatch, getState) => {
     }
     console.log("getAllCategories dispatched");
     dispatch({ type: "getAllCategoriesRequest" });
-    const res = await api.get(`${server}/category/get-all-categories`);
-    if (res.error) {
-      dispatch({ type: "getAllCategoriesFailed", payload: res.error.message || res.error });
+    const { data: resData } = await api.get(`${server}/category/get-all-categories`);
+    if (!resData) {
+      dispatch({ type: "getAllCategoriesFailed", payload: "No response data" });
       return;
     }
 
     dispatch({
       type: "getAllCategoriesSuccess",
-      payload: res.data.categories || [],
+      payload: resData.categories || [],
     });
   } catch (error) {
     dispatch({
@@ -61,15 +61,15 @@ export const deleteCategory = (id) => async (dispatch) => {
       type: "deleteCategoryRequest",
     });
 
-    const res = await api.delete(`${server}/category/delete-category/${id}`, { withCredentials: true });
-    if (res.error) {
-      dispatch({ type: "deleteCategoryFailed", payload: res.error.message || res.error });
+    const { data: resData } = await api.delete(`${server}/category/delete-category/${id}`, { withCredentials: true });
+    if (!resData) {
+      dispatch({ type: "deleteCategoryFailed", payload: "No response data" });
       return;
     }
 
     dispatch({
       type: "deleteCategorySuccess",
-      payload: res.data.message,
+      payload: resData.message,
     });
   } catch (error) {
     dispatch({
@@ -91,15 +91,15 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
 
     console.log('Sending update request with data:', categoryData);
 
-    const res = await api.put(`${server}/category/update-category/${id}`, categoryData, config);
-    if (res.error) {
-      dispatch({ type: "updateCategoryFailed", payload: res.error.message || res.error });
+    const { data: resData } = await api.put(`${server}/category/update-category/${id}`, categoryData, config);
+    if (!resData) {
+      dispatch({ type: "updateCategoryFailed", payload: "No response data" });
       return;
     }
 
     dispatch({
       type: "updateCategorySuccess",
-      payload: res.data.category,
+      payload: resData.category,
     });
   } catch (error) {
     console.error('Error in updateCategory action:', error);
@@ -117,15 +117,15 @@ export const getCategoryById = (id) => async (dispatch) => {
       type: "getCategoryByIdRequest",
     });
 
-    const res = await api.get(`${server}/category/get-category/${id}`);
-    if (res.error) {
-      dispatch({ type: "getCategoryByIdFailed", payload: res.error.message || res.error });
+    const { data: resData } = await api.get(`${server}/category/get-category/${id}`);
+    if (!resData) {
+      dispatch({ type: "getCategoryByIdFailed", payload: "No response data" });
       return;
     }
 
     dispatch({
       type: "getCategoryByIdSuccess",
-      payload: res.data.category,
+      payload: resData.category,
     });
   } catch (error) {
     dispatch({

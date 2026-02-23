@@ -8,7 +8,7 @@ import { getAllCategories } from "../../redux/actions/category";
 import { addTocart } from "../../redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import { toast } from "react-toastify";
-import axios from "axios";
+import api from "../../utils/api";
 import peacImg from "../../Assests/images/peac.png";
 import Ratings from "../Products/Ratings";
 import styles from "../../styles/styles";

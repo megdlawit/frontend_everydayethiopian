@@ -70,7 +70,7 @@ import SellerProtectedRoute from "./routes/SellerProtectedRoute";
 import DeliveryProtectedRoute from "./routes/DeliveryProtectedRoute";
 import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
-import axios from "axios";
+import api from "./utils/api";
 import api from "./utils/api";
 import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";

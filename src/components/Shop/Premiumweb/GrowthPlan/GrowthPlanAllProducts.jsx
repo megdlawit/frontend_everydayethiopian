@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams, Link, useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../../../utils/api";
 import Footer from "../../../Layout/Footer";
 import ProductCard from "../../../Route/ProductCard/ProductCard";
 import { MdTune } from "react-icons/md";

@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import { addTocart } from "../../redux/actions/cart";
 import { toast, ToastContainer } from "react-toastify";
-import axios from "axios";
+import api from "../../utils/api";
 import { Link } from "react-router-dom";
 import Toast from "../Toast";
 import { server, backend_url } from "../../server";
@@ -51,7 +51,7 @@ const VideoProductShow = ({ shopId }) => {
   useEffect(() => {
     const fetchProductsWithVideos = async () => {
       try {
-        const response = await axios.get(
+        const response = await api.get(
           `${server}/product/get-products-with-videos`
         );
         let filteredProducts = response.data.products.filter(

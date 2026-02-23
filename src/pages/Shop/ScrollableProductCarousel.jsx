@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import api from "../../utils/api";
 import { server, backend_url } from "../../server";
 
 const ScrollableProductCarousel = () => {
@@ -15,7 +15,7 @@ const ScrollableProductCarousel = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get(`${server}/product/get-all-products`);
+        const { data } = await api.get(`${server}/product/get-all-products`);
         setProducts(data.products);
       } catch (error) {
         console.error("Failed to fetch products:", error);

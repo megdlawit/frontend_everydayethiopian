@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiOutlineEye, AiOutlineClose } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/Toast"; // Adjust path as needed
-import axios from "axios";
+import api from "../../utils/api";
 import { server, backend_url } from "../../server";
 import Loader from "../Layout/Loader";
 import Pagination from "../Pagination";
@@ -73,7 +73,7 @@ const UnapprovedDeliveries = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`${server}/delivery/approve/${id}`, {}, { withCredentials: true });
+      await api.put(`${server}/delivery/approve/${id}`, {}, { withCredentials: true });
       showToast("success", "Approval Success", "Delivery company approved successfully!");
       setDeliveries((prev) =>
         prev.map((delivery) =>
@@ -88,7 +88,7 @@ const UnapprovedDeliveries = () => {
 
   const handleDecline = async (id) => {
     try {
-      await axios.put(`${server}/delivery/decline/${id}`, {}, { withCredentials: true });
+      await api.put(`${server}/delivery/decline/${id}`, {}, { withCredentials: true });
       showToast("success", "Decline Success", "Delivery company declined successfully!");
       setDeliveries((prev) =>
         prev.map((delivery) =>

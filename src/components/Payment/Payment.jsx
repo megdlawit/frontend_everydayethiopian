@@ -7,7 +7,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

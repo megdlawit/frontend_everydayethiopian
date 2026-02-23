@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../../../utils/api';
 import { server, backend_url } from '../../../../server';
 import HeroHeader from './HeroHeader';
 import GrowthPlanHero from './GrowthPlanHero';

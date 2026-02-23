@@ -6,7 +6,7 @@ import AdminSideBar from "../components/Admin/Layout/AdminSideBar";
 import Loader from "../components/Layout/Loader";
 import Pagination from "../components/Pagination";
 import { getAllOrdersOfAdmin } from "../redux/actions/order";
-import axios from "axios";
+import api from "../utils/api";
 import { server } from "../server";
 import { toast } from "react-toastify";
 import Toast from "../components/Toast";

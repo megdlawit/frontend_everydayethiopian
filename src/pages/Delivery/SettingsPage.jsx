@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import api from "../../utils/api";
 import { server, backend_url } from "../../server";
 import DashboardHeader from "../../components/Delivery/Layout/DashboardHeader";
 import DashboardSideBar from "../../components/Delivery/Layout/DashboardSideBar";
@@ -30,7 +30,7 @@ const SettingsPage = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const { data } = await axios.get(`${server}/delivery/dashboard`, {
+        const { data } = await api.get(`${server}/delivery/dashboard`, {
           withCredentials: true,
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });

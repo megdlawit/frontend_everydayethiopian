@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { server, backend_url } from "../../../../server";
 import ProPlanHero from "./ProPlanHero";
 import ProPlanEvents from "./ProPlanEvents";
@@ -38,17 +38,17 @@ const ProPlanMain = () => {
     const fetchShopData = async () => {
       setLoading(true);
       try {
-        const shopRes = await axios.get(`${server}/shop/get-shop-info/${id}`);
+        const shopRes = await api.get(`${server}/shop/get-shop-info/${id}`);
         const shopRaw = shopRes.data.shop;
         const logo = shopRaw.avatar?.url ? `${backend_url}${shopRaw.avatar.url}` : "/Uploads/placeholder-image.jpg";
         setShop({ ...shopRaw, logo });
 
-        const productsRes = await axios.get(
+        const productsRes = await api.get(
           `${server}/product/get-all-products-shop/${id}`
         );
         setProducts(productsRes.data.products);
 
-        const eventsRes = await axios.get(`${server}/event/get-all-events/${id}`);
+        const eventsRes = await api.get(`${server}/event/get-all-events/${id}`);
         setEvents(eventsRes.data.events);
       } catch (err) {
         // handle error

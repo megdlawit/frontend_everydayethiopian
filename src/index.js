@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import Store from "./redux/store";
-import axios from "axios";
+import api from "./utils/api";
 import { server } from "./server";
 
 // Global axios defaults for cookie auth and base URL

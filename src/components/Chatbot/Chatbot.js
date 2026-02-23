@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-import axios from "axios";
+import api from "../../utils/api";
 import { useSelector } from "react-redux";
 import peac from "../../Assests/images/peac.png"; // Import the chat icon
 

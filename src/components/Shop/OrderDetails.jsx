@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { server, backend_url } from "../../server";
-import axios from "axios";
+import api from "../../utils/api";
 import { toast } from "react-toastify";
 import Ratings from "../Products/Ratings";
 import styles from "../../styles/styles";
@@ -109,7 +109,7 @@ const OrderDetails = () => {
       return;
     }
     try {
-      await axios.put(
+      await api.put(
         `${server}/order/order-refund-success/${targetOrderId}`,
         { 
           refundRequestIndex, 
@@ -133,7 +133,7 @@ const OrderDetails = () => {
 
   const fetchDeliveryList = async () => {
     try {
-      const { data } = await axios.get(`${server}/delivery/all`, {
+      const { data } = await api.get(`${server}/delivery/all`, {
         withCredentials: true,
       });
       setDeliveryList(data.deliveries.filter((delivery) => delivery.isApproved));
@@ -144,7 +144,7 @@ const OrderDetails = () => {
 
   const fetchOrderData = async () => {
     try {
-      const { data: orderData } = await axios.get(`${server}/order/get-order/${id}`, {
+      const { data: orderData } = await api.get(`${server}/order/get-order/${id}`, {
         withCredentials: true,
       });
       setData(orderData.order);
@@ -162,7 +162,7 @@ const OrderDetails = () => {
       }
       if (orderData.order?.user?._id && (!orderData.order.user.name || !orderData.order.user.email)) {
         setIsUserLoading(true);
-        const { data: userResponse } = await axios.get(`${server}/user/user-info/${orderData.order.user._id}`, {
+        const { data: userResponse } = await api.get(`${server}/user/user-info/${orderData.order.user._id}`, {
           withCredentials: true,
         });
         setUserData(userResponse.user);
@@ -181,7 +181,7 @@ const OrderDetails = () => {
 
   const fetchDeliveryRequest = async () => {
     try {
-      const { data } = await axios.get(`${server}/delivery/request/${id}`, {
+      const { data } = await api.get(`${server}/delivery/request/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       setDeliveryRequest(data.deliveryRequest);
@@ -198,7 +198,7 @@ const OrderDetails = () => {
       return;
     }
     try {
-      await axios.put(
+      await api.put(
         `${server}/order/assign-delivery/${id}`,
         { deliveryId },
         { withCredentials: true }
@@ -219,7 +219,7 @@ const OrderDetails = () => {
         Canceled: "declined",
       };
       const backendStatus = backendStatusMap[newStatus] || newStatus;
-      await axios.put(
+      await api.put(
         `${server}/delivery/request/${id}`,
         { status: backendStatus },
         {
@@ -239,7 +239,7 @@ const OrderDetails = () => {
     if (!productId) return;
     setProductLoading(true);
     try {
-        const { data } = await axios.get(`${server}/product/detail/${productId}`);
+        const { data } = await api.get(`${server}/product/detail/${productId}`);
         if (data.success) {
             setSelectedProduct(data.product);
         } else {

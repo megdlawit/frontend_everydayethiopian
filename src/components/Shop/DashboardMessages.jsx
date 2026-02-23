@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
 import { server, backend_url } from "../../server";
-import axios from "axios";
+import api from "../../utils/api";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
@@ -100,7 +100,7 @@ const DashboardMessages = () => {
           throw new Error("User ID is not available");
         }
         // Use admin-specific endpoint for conversation retrieval
-        const response = await axios.get(
+        const response = await api.get(
           `${server}/conversation/get-all-conversation-admin/${user._id}`,
           { withCredentials: true }
         );
@@ -125,7 +125,7 @@ const DashboardMessages = () => {
           const userId = existingChat.members.find((member) => member !== user._id);
           const getUser = async () => {
             try {
-              const res = await axios.get(`${server}/conversation/get-account-info/${userId}`, {
+              const res = await api.get(`${server}/conversation/get-account-info/${userId}`, {
                 withCredentials: true,
               });
               setUserData(res.data.account);
@@ -136,7 +136,7 @@ const DashboardMessages = () => {
           getUser();
         } else {
           try {
-            const response = await axios.get(
+            const response = await api.get(
               `${server}/conversation/get-conversation/${conversationId}`,
               { withCredentials: true }
             );
@@ -147,7 +147,7 @@ const DashboardMessages = () => {
             const userId = newChat.members.find((member) => member !== user._id);
             const getUser = async () => {
               try {
-                const res = await axios.get(`${server}/conversation/get-account-info/${userId}`, {
+                const res = await api.get(`${server}/conversation/get-account-info/${userId}`, {
                   withCredentials: true,
                 });
                 setUserData(res.data.account);
@@ -172,7 +172,7 @@ const DashboardMessages = () => {
         if (!currentChat?._id) {
           throw new Error("Current chat ID is not available");
         }
-        const response = await axios.get(
+        const response = await api.get(
           `${server}/message/get-all-messages/${currentChat._id}`,
           { withCredentials: true }
         );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { server, backend_url } from "../../../../server";
 import Footer from "../../../Layout/Footer";
 import { FaPen, FaSave, FaTimes, FaTruck, FaGem, FaHandshake, FaLeaf, FaStore, FaCamera } from "react-icons/fa";
@@ -229,7 +229,7 @@ const GrowthPlanEdit = () => {
 
       const formData = new FormData();
       formData.append("avatar", file);
-      const response = await axios.put(`${server}/shop/update-shop-avatar`, formData, {
+      const response = await api.put(`${server}/shop/update-shop-avatar`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -456,7 +456,7 @@ const GrowthPlanEdit = () => {
       if (aboutImageFile) formData.append("aboutImage", aboutImageFile);
       formData.append("features", JSON.stringify(shopData.features || []));
 
-      const heroAboutRes = await axios.put(
+      const heroAboutRes = await api.put(
         `${server}/shop/update-hero-about`,
         formData,
         {
@@ -490,7 +490,7 @@ const GrowthPlanEdit = () => {
         socialMedias: shopData.socialMedias || [],
       };
 
-      await axios.put(`${server}/shop/update-seller-info`, payload, {
+      await api.put(`${server}/shop/update-seller-info`, payload, {
         withCredentials: true,
       });
 
@@ -512,7 +512,7 @@ const GrowthPlanEdit = () => {
         }
 
         try {
-          const response = await axios.put(
+          const response = await api.put(
             `${server}/product/edit-product/${product._id}`,
             productFormData,
             {
@@ -558,7 +558,7 @@ const GrowthPlanEdit = () => {
         if (event.newImageFile) {
           eventFormData.append("images", event.newImageFile);
         }
-        await axios.put(`${server}/event/edit-event/${event._id}`, eventFormData, {
+        await api.put(`${server}/event/edit-event/${event._id}`, eventFormData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         });
@@ -574,7 +574,7 @@ const GrowthPlanEdit = () => {
       if (growthPlanVideoFile) {
         const videoFormData = new FormData();
         videoFormData.append("growthPlanVideo", growthPlanVideoFile);
-        await axios.put(`${server}/shop/update-growthplan-video`, videoFormData, {
+        await api.put(`${server}/shop/update-growthplan-video`, videoFormData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
