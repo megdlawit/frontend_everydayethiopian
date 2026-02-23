@@ -1,4 +1,4 @@
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import {
   GET_ALL_ADVERTISEMENTS_REQUEST,
@@ -19,7 +19,7 @@ export const getAllAdvertisements = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_ADVERTISEMENTS_REQUEST });
 
-    const { data } = await api.get(`${server}/shop/all-advertisements`);
+    const { data } = await axios.get(`${server}/shop/all-advertisements`);
 
     dispatch({
       type: GET_ALL_ADVERTISEMENTS_SUCCESS,
@@ -37,7 +37,7 @@ export const deleteAdvertisement = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ADVERTISEMENT_REQUEST });
 
-    await api.delete(`${server}/shop/delete-advertisement/${id}`);
+    await axios.delete(`${server}/shop/delete-advertisement/${id}`);
 
     dispatch({
       type: DELETE_ADVERTISEMENT_SUCCESS,
@@ -57,7 +57,7 @@ export const createAdvertisement = (formData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ADVERTISEMENT_REQUEST });
 
-    const { data } = await api.post(`${server}/shop/create-advertisement`, formData, {
+    const { data } = await axios.post(`${server}/shop/create-advertisement`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -82,7 +82,7 @@ export const updateAdvertisement = (id, formData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ADVERTISEMENT_REQUEST });
 
-    const { data } = await api.put(`${server}/shop/update-advertisement/${id}`, formData, {
+    const { data } = await axios.put(`${server}/shop/update-advertisement/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

@@ -39,10 +39,8 @@ const RATING_RANGES = [
 
 // Helper function to get full image URL
 const getImageUrl = (url) => {
-  if (!url) return "/placeholder-image.png";
-  if (url.startsWith("http")) return url;
-  // Ensure single slash between backend_url and url
-  return `${backend_url}${url.startsWith("/") ? "" : "/"}${url}`;
+  if (!url) return "/Uploads/placeholder-image.jpg";
+  return url.startsWith("http") ? url : `${backend_url}${url}`;
 };
 
 const BestSellingPage = () => {
@@ -379,7 +377,7 @@ const BestSellingPage = () => {
                                 className="w-20 h-16 object-cover rounded-md"
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = "/placeholder-image.png";
+                                  e.target.src = "/Uploads/placeholder-image.jpg";
                                 }}
                               />
                               <div className="absolute inset-0 bg-[#CA8A0A] bg-opacity-60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">
@@ -545,7 +543,7 @@ const BestSellingPage = () => {
                           className="w-[300px] h-[100px] object-cover rounded-md"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = "/placeholder-image.png";
+                            e.target.src = "/Uploads/placeholder-image.jpg";
                           }}
                         />
                         <div className="absolute inset-0 bg-[#CA8A0A] bg-opacity-60 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md">

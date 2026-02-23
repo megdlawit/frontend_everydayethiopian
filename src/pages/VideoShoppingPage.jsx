@@ -10,7 +10,7 @@ import { addToWishlist, removeFromWishlist } from "../redux/actions/wishlist";
 import { addTocart } from "../redux/actions/cart";
 import { toast } from "react-toastify";
 import Toast from "../components/Toast";
-import api from "../utils/api";
+import axios from "axios";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import Pagination from "../components/Pagination";
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
@@ -90,28 +90,17 @@ const VideoShoppingPage = () => {
   useEffect(() => {
     const fetchProductsWithVideos = async () => {
       try {
-        // First try normal request
-        let response = await api.get(`/product/get-products-with-videos`, { params: { limit: 100 } });
-
-        // If server returned 304 or no body (cached), refetch with cache-busting
-        if (response.status === 304 || !response.data) {
-          response = await api.get(`/product/get-products-with-videos`, {
-            params: { limit: 100, t: Date.now() },
-            headers: { "Cache-Control": "no-cache" },
-          });
-        }
-
-        const productsData = response?.data?.products || [];
-        setProducts(productsData);
+        const response = await axios.get(`${server}/product/get-products-with-videos?limit=100`);
+        setProducts(response.data.products);
 
         // Set first video unmuted, others muted
         const vids = {};
-        productsData.forEach((p, idx) => {
+        response.data.products.forEach((p, idx) => {
           vids[p._id] = idx === 0 ? false : true;
         });
         setMutedVideos(vids);
       } catch (error) {
-        console.error("Error fetching products with videos:", error?.message || error);
+        console.error("Error fetching products with videos:", error);
       }
     };
     fetchProductsWithVideos();

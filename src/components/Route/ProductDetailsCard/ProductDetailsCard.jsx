@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Toast from "../../../components/Toast"; // Adjust the path to your Toast component as needed
 import { addTocart } from "../../../redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../../../redux/actions/wishlist";
-import api from "../../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../../server";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
@@ -22,7 +22,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
   // Helper function to get full image URL
   const getImageUrl = (url) => {
-    if (!url) return "/placeholder-image.png";
+    if (!url) return "/uploads/placeholder-image.jpg";
     return url.startsWith('http') ? url : `${backend_url}${url}`;
   };
 
@@ -125,7 +125,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   };
 
   const handleImageError = (e) => {
-    e.target.src = "/placeholder-image.png"; // Provide a default fallback image
+    e.target.src = "/uploads/placeholder-image.jpg"; // Provide a default fallback image
   };
 
   return (

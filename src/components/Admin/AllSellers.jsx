@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineSearch, AiOutlineEye, AiOutlineDelete, AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast"; // Adjust path to your custom Toast component

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useSearchParams, Link, useParams } from "react-router-dom";
 
-import api from "../../../../utils/api";
+import axios from "axios";
 
 import Footer from "../../../Layout/Footer";
 

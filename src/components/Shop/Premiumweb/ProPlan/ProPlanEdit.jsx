@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../../../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../../../server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -410,7 +410,7 @@ const ProPlanEdit = () => {
 
   const fetchShopData = async () => {
     try {
-      const shopRes = await api.get(`${server}/shop/get-shop-info/${id}`, { withCredentials: true });
+      const shopRes = await axios.get(`${server}/shop/get-shop-info/${id}`, { withCredentials: true });
       if (!shopRes?.data?.shop) {
         throw new Error("Shop response data is missing");
       }
@@ -424,13 +424,13 @@ const ProPlanEdit = () => {
         socialMedias: Array.isArray(shopRaw.socialMedias) ? shopRaw.socialMedias : [],
       });
 
-      const productsRes = await api.get(`${server}/product/get-all-products-shop/${id}`, { withCredentials: true });
+      const productsRes = await axios.get(`${server}/product/get-all-products-shop/${id}`, { withCredentials: true });
       if (!productsRes?.data?.products) {
         throw new Error("Products response data is missing");
       }
       setProducts(productsRes.data.products.map(p => normalizeProduct(p, backend_url)));
 
-      const eventsRes = await api.get(`${server}/event/get-all-events/${id}`, { withCredentials: true });
+      const eventsRes = await axios.get(`${server}/event/get-all-events/${id}`, { withCredentials: true });
       if (!eventsRes?.data?.events) {
         throw new Error("Events response data is missing");
       }
@@ -669,7 +669,7 @@ const ProPlanEdit = () => {
         try {
           const formData = new FormData();
           formData.append("avatar", shopData.newLogoFile);
-          const response = await api.put(`${server}/shop/update-shop-avatar`, formData, {
+          const response = await axios.put(`${server}/shop/update-shop-avatar`, formData, {
             withCredentials: true,
             headers: { "Content-Type": "multipart/form-data" },
           });
@@ -694,7 +694,7 @@ const ProPlanEdit = () => {
         if (aboutImageFile) heroAboutFormData.append("aboutImage", aboutImageFile);
         heroAboutFormData.append("features", JSON.stringify(shopData.features || []));
 
-        const heroAboutRes = await api.put(`${server}/shop/update-hero-about`, heroAboutFormData, {
+        const heroAboutRes = await axios.put(`${server}/shop/update-hero-about`, heroAboutFormData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -727,7 +727,7 @@ const ProPlanEdit = () => {
           contactDescription: shopData.contactDescription || "",
         };
 
-        await api.put(`${server}/shop/update-seller-info`, payload, { withCredentials: true });
+        await axios.put(`${server}/shop/update-seller-info`, payload, { withCredentials: true });
         showToast("success", "Info Updated", "Shop info updated successfully!");
       } catch (error) {
         console.error("Shop info update error:", error);
@@ -758,7 +758,7 @@ const ProPlanEdit = () => {
             }
 
             try {
-              const response = await api.put(`${server}/product/edit-product/${product._id}`, productFormData, {
+              const response = await axios.put(`${server}/product/edit-product/${product._id}`, productFormData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
               });
@@ -815,7 +815,7 @@ const ProPlanEdit = () => {
             }
 
             try {
-              const response = await api.put(`${server}/event/edit-event/${event._id}`, eventFormData, {
+              const response = await axios.put(`${server}/event/edit-event/${event._id}`, eventFormData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
               });

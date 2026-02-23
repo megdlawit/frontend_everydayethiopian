@@ -6,7 +6,7 @@ import { createevent } from "../../redux/actions/event";
 import { getAllCategories } from "../../redux/actions/category";
 import { getAllEventsShop } from "../../redux/actions/event";
 import { toast } from "react-toastify";
-import api from "../../utils/api";
+import axios from "axios";
 import peacImg from "../../Assests/images/peac.png";
 import { server } from "../../server";
 import Toast from "../../components/Toast"; 

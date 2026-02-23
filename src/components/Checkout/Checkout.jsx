@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,7 @@ export const clearCart = () => ({
 const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
     try {
-      const response = await api.get(url, { ...options, timeout: 10000 });
+      const response = await axios.get(url, { ...options, timeout: 10000 });
       return response;
     } catch (error) {
       if (i < retries - 1) {

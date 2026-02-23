@@ -5,7 +5,7 @@ import { getAllOrdersOfUser } from "../redux/actions/order";
 import { server } from "../server";
 import { BsX } from "react-icons/bs";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import api from "../utils/api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import Toast from "../components/Toast"; 
 
@@ -74,10 +74,17 @@ const PerItemRefundForm = ({ isOpen, onClose, item, orderForRefund, onSubmit }) 
         formData.append("refundImages", image);
       }
 
-      const response = await api.put(`/order/order-refund/${orderForRefund._id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      showToast("success", "Refund Submitted", response?.data?.message || "Refund request submitted successfully!");
+      const response = await axios.put(
+        `${server}/order/order-refund/${orderForRefund._id}`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      showToast("success", "Refund Submitted", response.data.message || "Refund request submitted successfully!");
       onSubmit();
       handleClose();
     } catch (error) {
@@ -243,14 +250,18 @@ const UserOrderDetails = () => {
 
   const reviewHandler = async () => {
     try {
-      const response = await api.put(`/product/create-new-review`, {
-        user,
-        rating,
-        comment,
-        productId: selectedItem?._id,
-        orderId: id,
-      });
-      showToast("success", "Review Submitted", response?.data?.message || "Review submitted");
+      const response = await axios.put(
+        `${server}/product/create-new-review`,
+        {
+          user,
+          rating,
+          comment,
+          productId: selectedItem?._id,
+          orderId: id,
+        },
+        { withCredentials: true }
+      );
+      showToast("success", "Review Submitted", response.data.message);
       dispatch(getAllOrdersOfUser(user._id));
       setComment("");
       setRating(1);
@@ -283,8 +294,13 @@ const UserOrderDetails = () => {
       const groupTitle = `order_${data._id}_${user._id}_${sellerId}`;
       const userId = user._id;
 
-      const res = await api.post(`/conversation/create-new-conversation`, { groupTitle, userId, sellerId });
-      navigate(`/inbox?${res?.data?.conversation?._id || res?.data?.conversation}`);
+      const res = await axios.post(
+        `${server}/conversation/create-new-conversation`,
+        { groupTitle, userId, sellerId },
+        { withCredentials: true }
+      );
+
+      navigate(`/inbox?${res.data.conversation._id}`);
     } catch (error) {
       if (error.response?.status === 400) {
         navigate(`/inbox?${sellerId}`);

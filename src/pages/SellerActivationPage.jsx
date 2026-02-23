@@ -1,4 +1,4 @@
-import api from "../utils/api";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -39,7 +39,7 @@ const SellerActivationPage = () => {
     if (activation_token) {
       const activateAccount = async () => {
         try {
-          const res = await api.get(`${server}/shop/activation/${activation_token}`, {
+          const res = await axios.get(`${server}/shop/activation/${activation_token}`, {
             withCredentials: true
           });
 

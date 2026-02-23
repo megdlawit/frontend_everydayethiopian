@@ -6,7 +6,7 @@ import { getAllOrdersOfAdmin } from "../../redux/actions/order";
 import { getAllSellers } from "../../redux/actions/sellers";
 import { getAllUsers } from "../../redux/actions/user";
 import { getAllProducts } from "../../redux/actions/product";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast"; // Adjust path to your custom Toast component

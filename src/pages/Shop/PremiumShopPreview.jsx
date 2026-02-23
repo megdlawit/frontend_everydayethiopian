@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { getAllEventsShop } from "../../redux/actions/event";
 import { server, backend_url } from "../../server";
-import api from "../../utils/api";
+import axios from "axios";
 import Footer from "../../components/Layout/Footer";
 import ProductCard from "../../components/Route/ProductCard/ProductCard";
 import EventCard from "../../components/Events/EventCard";
@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 // Helper function to get full image URL
 const getImageUrl = (url) => {
-  if (!url) return "/placeholder-image.png";
+  if (!url) return "/uploads/placeholder-image.jpg";
   return url.startsWith("http") ? url : `${backend_url}${url}`;
 };
 
@@ -31,12 +31,12 @@ const PremiumShopPreview = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const { data } = await api.get(`${server}/shop/get-shop-info/${id}`);
-        setShopData(data?.shop ?? {});
+        const shopResponse = await axios.get(`${server}/shop/get-shop-info/${id}`);
+        setShopData(shopResponse.data.shop);
         dispatch(getAllProductsShop(id));
         dispatch(getAllEventsShop(id));
       } catch (error) {
-        console.error("Unexpected error fetching shop data:", error?.response?.data || error.message || error);
+        console.error("Error fetching shop data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -44,8 +44,7 @@ const PremiumShopPreview = () => {
     fetchData();
   }, [dispatch, id]);
 
-  const safeProducts = products || [];
-  const allReviews = safeProducts.flatMap((product) => product.reviews || []);
+  const allReviews = products && products.map((product) => product.reviews).flat();
 
   const handleShare = () => {
     const url = `${window.location.origin}/shop/premiumpreview/${id}`;
@@ -71,7 +70,7 @@ const PremiumShopPreview = () => {
   };
 
   const handleImageError = (e) => {
-    e.target.src = "/placeholder-image.png";
+    e.target.src = "/uploads/placeholder-image.jpg";
   };
 
   if (isLoading) {
@@ -169,8 +168,8 @@ const PremiumShopPreview = () => {
           Shop Our Collection
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {(safeProducts.length > 0) ? (
-            safeProducts.map((product) => (
+          {products && products.length > 0 ? (
+            products.map((product) => (
               <ProductCard key={product._id} data={product} isShop={true} />
             ))
           ) : (

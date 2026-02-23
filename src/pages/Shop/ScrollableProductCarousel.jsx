@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 
 const ScrollableProductCarousel = () => {
@@ -8,14 +8,14 @@ const ScrollableProductCarousel = () => {
 
   // Helper function to get full image URL
   const getImageUrl = (url) => {
-    if (!url) return "/placeholder-image.png";
+    if (!url) return "/uploads/placeholder-image.jpg";
     return url.startsWith("http") ? url : `${backend_url}${url}`;
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await api.get(`${server}/product/get-all-products`);
+        const { data } = await axios.get(`${server}/product/get-all-products`);
         setProducts(data.products);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -58,7 +58,7 @@ const ScrollableProductCarousel = () => {
               className="w-full h-[200px] object-cover rounded-lg"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "/placeholder-image.png"; // Fallback
+                e.target.src = "/uploads/placeholder-image.jpg"; // Fallback
               }}
             />
             {/* Hover Overlay */}

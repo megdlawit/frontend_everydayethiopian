@@ -129,7 +129,7 @@ const WishlistSingle = ({
           </video>
         ) : (
           <img
-            src={posterSrc || "/placeholder-image.png"}
+            src={posterSrc || "/placeholder-image.jpg"}
             alt="Product"
             className="w-full sm:w-[120px] h-32 sm:h-[100px] object-cover rounded-[5px] mb-3 sm:mb-0 sm:mr-4"
           />

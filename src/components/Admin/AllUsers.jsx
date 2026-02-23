@@ -4,7 +4,7 @@ import { AiOutlineSearch, AiOutlineDelete } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/Toast"; // Adjust path as needed
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import { getAllUsers } from "../../redux/actions/user";
 import Loader from "../Layout/Loader";

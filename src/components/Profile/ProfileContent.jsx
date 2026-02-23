@@ -7,7 +7,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { updateUserInformation, loadUser, deleteUserAddress, updateUserAddress } from "../../redux/actions/user";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import { Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
@@ -64,7 +64,7 @@ const RefundForm = ({ isOpen, onClose, orderId, item, onSubmit, showToast }) => 
       if (image) {
         formData.append("refundImages", image);
       }
-      const response = await api.put(
+      const response = await axios.put(
         `${server}/order/order-refund/${orderId}`,
         formData,
         {
@@ -456,7 +456,7 @@ const decrementModalCount = () => {
     const formData = new FormData();
     formData.append("avatar", file);
     try {
-      const response = await api.put(`${server}/user/update-avatar`, formData, {
+      const response = await axios.put(`${server}/user/update-avatar`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -585,7 +585,7 @@ const handleDelete = () => {
   };
   const reviewHandler = async () => {
     try {
-      const response = await api.put(
+      const response = await axios.put(
         `${server}/product/create-new-review`,
         {
           user,
@@ -2137,7 +2137,7 @@ const handleDelete = () => {
     const passwordChangeHandler = async (e) => {
       e.preventDefault();
       try {
-        const res = await api.put(
+        const res = await axios.put(
           `${server}/user/update-user-password`,
           { oldPassword, newPassword, confirmPassword },
           { withCredentials: true }

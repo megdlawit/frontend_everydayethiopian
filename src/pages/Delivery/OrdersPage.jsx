@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { loadDeliveryUser } from "../../redux/actions/delivery";
@@ -42,7 +42,7 @@ const OrdersPage = () => {
     if (!deliveryLoading && isDelivery && deliveryUser) {
       const fetchOrders = async () => {
         try {
-          const { data } = await api.get(`${server}/delivery/assigned-orders`, {
+          const { data } = await axios.get(`${server}/delivery/assigned-orders`, {
             withCredentials: true,
           });
           const sortedOrders = (data.assignedOrders || []).sort(

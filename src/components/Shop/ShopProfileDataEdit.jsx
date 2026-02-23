@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import { getAllProductsShop, updateProduct } from "../../redux/actions/product";
 import { getAllEventsShop, updateEvent } from "../../redux/actions/event";
@@ -104,7 +104,7 @@ const ShopProfileDataEdit = ({ isOwner }) => {
 
       try {
         setLoading(true);
-        const response = await api.get(`${server}/shop/get-shop-info/${id}`, {
+        const response = await axios.get(`${server}/shop/get-shop-info/${id}`, {
           withCredentials: true,
         });
         const shop = response.data.shop;
@@ -229,7 +229,7 @@ const ShopProfileDataEdit = ({ isOwner }) => {
         shopPayload.phoneNumber !== (originalShop.phoneNumber || "");
 
       if (shopChanged) {
-        await api.put(`${server}/shop/update-seller-info`, shopPayload, {
+        await axios.put(`${server}/shop/update-seller-info`, shopPayload, {
           withCredentials: true,
         });
       }
@@ -237,7 +237,7 @@ const ShopProfileDataEdit = ({ isOwner }) => {
       if (shopData.logoFile) {
         const formData = new FormData();
         formData.append("avatar", shopData.logoFile);
-        const response = await api.put(`${server}/shop/update-shop-avatar`, formData, {
+        const response = await axios.put(`${server}/shop/update-shop-avatar`, formData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -268,7 +268,7 @@ const ShopProfileDataEdit = ({ isOwner }) => {
             formData.append("images", product.newImageFile);
           }
 
-          await api.put(
+          await axios.put(
             `${server}/product/edit-product/${product._id}`,
             formData,
             {
@@ -301,7 +301,7 @@ const ShopProfileDataEdit = ({ isOwner }) => {
             formData.append("images", event.newImageFile);
           }
 
-          await api.put(
+          await axios.put(
             `${server}/event/edit-event/${event._id}`,
             formData,
             {

@@ -19,7 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/Toast"; // Adjust path as needed
 import Ratings from "./Ratings";
-import api from "../../utils/api";
+import axios from "axios";
 import peac from "../../Assests/images/peac.png";
 
 const ProductDetails = ({ data: initialData }) => {

@@ -9,7 +9,7 @@ import { CiSettings } from "react-icons/ci";
 import { RxDashboard } from "react-icons/rx";
 import { FaPowerOff } from "react-icons/fa";
 import { server, backend_url } from "../../../server";
-import api from "../../../utils/api";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 const DashboardHeader = ({ onSidebarToggle }) => {
@@ -73,7 +73,7 @@ const DashboardHeader = ({ onSidebarToggle }) => {
 
   const handleLogout = async () => {
     try {
-      await api.get(`${server}/delivery/logout`, { withCredentials: true });
+      await axios.get(`${server}/delivery/logout`, { withCredentials: true });
     } catch (e) {
       // ignore
     }
@@ -102,7 +102,7 @@ const DashboardHeader = ({ onSidebarToggle }) => {
         toast.info(`Suggested delivery users for reassignment: ${suggestions}`);
       }
       try {
-        await api.get(`${server}/delivery/logout`, { withCredentials: true });
+        await axios.get(`${server}/delivery/logout`, { withCredentials: true });
       } catch {}
       localStorage.removeItem("authToken");
       dispatch({ type: "LoadDeliveryUserSuccess", payload: null });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import styles from "../../styles/styles";
 import { useParams } from "react-router-dom";

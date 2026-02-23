@@ -1,2 +1,5 @@
-export const server = process.env.REACT_APP_SERVER || "https://backend-everydayethiopian.onrender.com/api/v2";
-export const backend_url = process.env.REACT_APP_BACKEND_URL || "https://backend-everydayethiopian.onrender.com";
+// export const server = "http://localhost:8000";
+
+
+export const server = "https://backend-everydayethiopian.onrender.com/api/v2";
+export const backend_url  = "https://backend-everydayethiopian.onrender.com/";

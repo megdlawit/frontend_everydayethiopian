@@ -9,7 +9,7 @@ import { CiSettings } from "react-icons/ci";
 import { logoutSeller } from "../../../redux/actions/sellers";
 // import { logoutUser } from "../../../redux/actions/user"; 
 import { toast } from "react-toastify";
-import api from "../../../utils/api";
+import axios from "axios";
 import { server } from "../../../server";
 import Toast from "../../Toast";
 import { ToastContainer } from "react-toastify";
@@ -165,7 +165,7 @@ const DashboardHeader = ({ onSidebarToggle }) => {
   const handleDeactivate = async () => {
     try {
       const endpoint = isSeller ? `${server}/shop/deactivate-account` : `${server}/user/deactivate`;
-      await api.put(endpoint, {}, { withCredentials: true });
+      await axios.put(endpoint, {}, { withCredentials: true });
       showToast("success", "Deactivate Success", "Account deactivated successfully.");
       if (isSeller) {
         await dispatch(logoutSeller());

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import ShopPreviewPage from "./ShopPreviewPage"; // Basic version
 import PremiumShopPreview from "./PremiumShopPreview"; // Premium version
@@ -13,7 +13,7 @@ const ShopPreviewWrapper = () => {
   useEffect(() => {
     const fetchShopData = async () => {
       try {
-        const response = await api.get(`${server}/shop/get-shop-info/${id}`);
+        const response = await axios.get(`${server}/shop/get-shop-info/${id}`);
         setShopData(response.data.shop);
       } catch (error) {
         console.error("Error fetching shop data:", error);

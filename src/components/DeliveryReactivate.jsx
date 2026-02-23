@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import api from "../utils/api";
+import axios from "axios";
 import { server } from "../server";
 import Footer from "../components/Layout/Footer";
 

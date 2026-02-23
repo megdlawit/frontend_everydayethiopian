@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { server, backend_url } from "../../server";
-import api from "../../utils/api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast";
 import { getAllOrdersOfAdmin, updateAdminOrderStatus } from "../../redux/actions/order";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import { loadSeller } from "../../redux/actions/sellers";
 import Toast from "../Toast"; 

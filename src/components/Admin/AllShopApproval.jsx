@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../../components/Toast"; 
 import { AiOutlineSearch, AiOutlineEye, AiOutlineClose } from "react-icons/ai";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import Loader from "../Layout/Loader";
 import Pagination from "../Pagination";

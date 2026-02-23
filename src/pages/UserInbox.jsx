@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
 import { server, backend_url } from "../server";
-import api from "../utils/api";
+import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend, AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
@@ -102,7 +102,7 @@ const UserInbox = () => {
     const markMessagesAsSeen = async () => {
       if (currentChat?._id && user?._id) {
         try {
-          await api.put(
+          await axios.put(
             `${server}/message/mark-messages-seen/${currentChat._id}`,
             { userId: user._id },
             { withCredentials: true }
@@ -128,7 +128,7 @@ const UserInbox = () => {
       setMessages((prev) => [...prev, arrivalMessage]);
       // If the current chat is active and a new message arrives, mark it as seen immediately
       if (arrivalMessage.sender !== user._id) {
-        api.put(
+        axios.put(
           `${server}/message/mark-messages-seen/${currentChat._id}`,
           { userId: user._id },
           { withCredentials: true }
@@ -145,7 +145,7 @@ const UserInbox = () => {
         }
         const endpoint = `${server}/conversation/get-all-conversation-user/${user._id}`;
         console.log("Fetching conversations from:", endpoint);
-        const response = await api.get(endpoint, { withCredentials: true });
+        const response = await axios.get(endpoint, { withCredentials: true });
         console.log("Conversations response:", response.data);
         setConversations(response.data.conversations || []);
         setErrorMessage("");
@@ -169,11 +169,11 @@ const UserInbox = () => {
           setIsMobileChatOpen(true);
           const userId = existingChat.members.find((member) => member !== user._id);
           try {
-            const res = await api.get(`${server}/conversation/get-account-info/${userId}`, {
+            const res = await axios.get(`${server}/conversation/get-account-info/${userId}`, {
               withCredentials: true,
             });
             setUserData(res.data.account);
-            await api.put(
+            await axios.put(
               `${server}/message/mark-messages-seen/${conversationId}`,
               { userId: user._id },
               { withCredentials: true }
@@ -189,7 +189,7 @@ const UserInbox = () => {
           }
         } else {
           try {
-            const response = await api.get(
+            const response = await axios.get(
               `${server}/conversation/get-conversation/${conversationId}`,
               { withCredentials: true }
             );
@@ -201,11 +201,11 @@ const UserInbox = () => {
               setIsMobileChatOpen(true);
               const userId = newChat.members.find((member) => member !== user._id);
               try {
-                const res = await api.get(`${server}/conversation/get-account-info/${userId}`, {
+                const res = await axios.get(`${server}/conversation/get-account-info/${userId}`, {
                   withCredentials: true,
                 });
                 setUserData(res.data.account);
-                await api.put(
+                await axios.put(
                   `${server}/message/mark-messages-seen/${conversationId}`,
                   { userId: user._id },
                   { withCredentials: true }
@@ -230,7 +230,7 @@ const UserInbox = () => {
         if (!currentChat?._id) {
           throw new Error("Current chat ID is not available");
         }
-        const response = await api.get(
+        const response = await axios.get(
           `${server}/message/get-all-messages/${currentChat._id}`,
           { withCredentials: true }
         );
@@ -270,7 +270,7 @@ const UserInbox = () => {
     const receiverId = currentChat.members.find((member) => member !== user._id);
 
     try {
-      const response = await api.post(
+      const response = await axios.post(
         `${server}/message/create-new-message`,
         formData,
         {
@@ -356,7 +356,7 @@ const UserInbox = () => {
     const receiverId = currentChat.members.find((member) => member !== user._id);
 
     try {
-      const response = await api.post(
+      const response = await axios.post(
         `${server}/message/create-new-message`,
         formData,
         {
@@ -608,7 +608,7 @@ const MessageList = ({
     const userId = data.members.find((member) => member !== me);
     const getUser = async () => {
       try {
-        const res = await api.get(`${server}/conversation/get-account-info/${userId}`, {
+        const res = await axios.get(`${server}/conversation/get-account-info/${userId}`, {
           withCredentials: true,
         });
         console.log("Fetched account data:", res.data.account);

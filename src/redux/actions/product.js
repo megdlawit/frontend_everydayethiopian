@@ -1,4 +1,4 @@
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 
 export const createProduct = (formData) => async (dispatch) => {
@@ -7,9 +7,16 @@ export const createProduct = (formData) => async (dispatch) => {
       type: "productCreateRequest",
     });
 
-    const { data } = await api.post(`/product/create-product`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const { data } = await axios.post(
+      `${server}/product/create-product`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true, // Add this to send cookies
+      }
+    );
 
     dispatch({
       type: "productCreateSuccess",
@@ -30,7 +37,9 @@ export const getAllProductsShop = (id) => async (dispatch) => {
       type: "getAllProductsShopRequest",
     });
 
-    const { data } = await api.get(`/product/get-all-products-shop/${id}`);
+    const { data } = await axios.get(
+      `${server}/product/get-all-products-shop/${id}`
+    );
     dispatch({
       type: "getAllProductsShopSuccess",
       payload: data.products,
@@ -50,7 +59,12 @@ export const deleteProduct = (id) => async (dispatch) => {
       type: "deleteProductRequest",
     });
 
-    const { data } = await api.delete(`/product/delete-shop-product/${id}`);
+    const { data } = await axios.delete(
+      `${server}/product/delete-shop-product/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     dispatch({
       type: "deleteProductSuccess",
@@ -69,7 +83,7 @@ export const getAllProducts = () => async (dispatch) => {
   try {
     dispatch({ type: "getAllProductsRequest" });
 
-    const { data } = await api.get(`/product/get-all-products`);
+    const { data } = await axios.get(`${server}/product/get-all-products`);
 
     dispatch({
       type: "getAllProductsSuccess",
@@ -93,9 +107,11 @@ export const updateProduct = (id, productData) => async (dispatch) => {
       withCredentials: true,
     };
 
-    const { data } = await api.put(`/product/edit-product/${id}`, productData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const { data } = await axios.put(
+      `${server}/product/edit-product/${id}`,
+      productData,
+      config
+    );
 
     dispatch({
       type: "updateProductSuccess",
@@ -113,7 +129,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const getAllVideoProducts = (shopId) => async (dispatch) => {
   try {
     dispatch({ type: "getAllVideoProductsRequest" });
-    const { data } = await api.get(`/product/get-all-video-products/${shopId}`);
+    const { data } = await axios.get(`${server}/product/get-all-video-products/${shopId}`, { withCredentials: true });
     dispatch({
       type: "getAllVideoProductsSuccess",
       payload: data.products,
@@ -130,7 +146,7 @@ export const getAllVideoProducts = (shopId) => async (dispatch) => {
 export const getAllAdminVideoProducts = () => async (dispatch) => {
   try {
     dispatch({ type: "getAllVideoProductsRequest" });
-    const { data } = await api.get(`/product/admin-get-all-video-products`);
+    const { data } = await axios.get(`${server}/product/admin-get-all-video-products`, { withCredentials: true });
     dispatch({
       type: "getAllVideoProductsSuccess",
       payload: data.products,

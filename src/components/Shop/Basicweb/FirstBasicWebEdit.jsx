@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import api from "../../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../../server";
 import { getAllProductsShop, updateProduct } from "../../../redux/actions/product";
 import { getAllEventsShop, updateEvent } from "../../../redux/actions/event";
@@ -55,7 +55,7 @@ const FirstBasicWebEdit = ({ isOwner }) => {
 
       try {
         setLoading(true);
-        const response = await api.get(`${server}/shop/get-shop-info/${id}`, {
+        const response = await axios.get(`${server}/shop/get-shop-info/${id}`, {
           withCredentials: true,
         });
         const shop = response.data.shop;
@@ -194,7 +194,7 @@ const handleUpdate = async () => {
       shopPayload.phoneNumber !== (originalShop.phoneNumber || "");
 
     if (shopChanged) {
-      await api.put(`${server}/shop/update-seller-info`, shopPayload, {
+      await axios.put(`${server}/shop/update-seller-info`, shopPayload, {
         withCredentials: true,
       });
     }

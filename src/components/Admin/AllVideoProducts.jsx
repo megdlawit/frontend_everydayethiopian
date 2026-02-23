@@ -13,7 +13,7 @@ import { getAllAdminVideoProducts } from "../../redux/actions/product";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import { addTocart } from "../../redux/actions/cart";
 import Ratings from "../Products/Ratings";
-import api from "../../utils/api";
+import axios from "axios";
 import { server, backend_url } from "../../server";
 import styles from "../../styles/styles";
 import peac from "../../Assests/images/peac.png";

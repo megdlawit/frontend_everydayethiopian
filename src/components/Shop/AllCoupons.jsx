@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch, AiOutlineDelete, AiOutlineClose, AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineEye, AiOutlineEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import api from "../../utils/api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast";
 import Loader from "../Layout/Loader";
@@ -103,7 +103,7 @@ const AllCoupons = () => {
 
   const confirmDelete = async () => {
     try {
-      await api.delete(`${server}/coupon/delete-coupon/${deleteCouponId}`, { withCredentials: true });
+      await axios.delete(`${server}/coupon/delete-coupon/${deleteCouponId}`, { withCredentials: true });
       showToast("success", "Success", "Coupon code deleted successfully!");
       setCoupons(coupons.filter((coupon) => coupon._id !== deleteCouponId));
       setShowDeleteModal(false);
@@ -175,14 +175,14 @@ const AllCoupons = () => {
 
     try {
       if (editMode) {
-        await api.put(
+        await axios.put(
           `${server}/coupon/update-coupon/${editCouponId}`,
           payload,
           { withCredentials: true }
         );
         showToast("success", "Success", "Coupon code updated successfully!");
       } else {
-        await api.post(
+        await axios.post(
           `${server}/coupon/create-coupon-code`,
           payload,
           { withCredentials: true }

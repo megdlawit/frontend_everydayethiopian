@@ -1,4 +1,4 @@
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 
 // create event
@@ -8,9 +8,12 @@ export const createevent = (formData) => async (dispatch) => {
       type: "eventCreateRequest",
     });
 
-    const { data: responseData } = await api.post(`/event/create-event`, formData, {
+    const config = {
       headers: { "Content-Type": "multipart/form-data" },
-    });
+      withCredentials: true,
+    };
+
+    const { data: responseData } = await axios.post(`${server}/event/create-event`, formData, config);
     dispatch({
       type: "eventCreateSuccess",
       payload: responseData.event,
@@ -30,7 +33,7 @@ export const getAllEventsShop = (id) => async (dispatch) => {
       type: "getAlleventsShopRequest",
     });
 
-    const { data } = await api.get(`/event/get-all-events/${id}`);
+    const { data } = await axios.get(`${server}/event/get-all-events/${id}`);
     dispatch({
       type: "getAlleventsShopSuccess",
       payload: data.events,
@@ -50,7 +53,12 @@ export const deleteEvent = (id) => async (dispatch) => {
       type: "deleteeventRequest",
     });
 
-    const { data } = await api.delete(`/event/delete-shop-event/${id}`);
+    const { data } = await axios.delete(
+      `${server}/event/delete-shop-event/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     dispatch({
       type: "deleteeventSuccess",
@@ -71,7 +79,7 @@ export const getAllEvents = () => async (dispatch) => {
       type: "getAlleventsRequest",
     });
 
-    const { data } = await api.get(`/event/get-all-events`);
+    const { data } = await axios.get(`${server}/event/get-all-events`);
     dispatch({
       type: "getAlleventsSuccess",
       payload: data.events,
@@ -88,9 +96,16 @@ export const updateEvent = (id, eventData) => async (dispatch) => {
   try {
     dispatch({ type: "updateEventRequest" });
 
-    const { data } = await api.put(`/event/edit-event/${id}`, eventData, {
+    const config = {
       headers: { "Content-Type": "multipart/form-data" },
-    });
+      withCredentials: true,
+    };
+
+    const { data } = await axios.put(
+      `${server}/event/edit-event/${id}`,
+      eventData,
+      config
+    );
 
     dispatch({
       type: "updateEventSuccess",

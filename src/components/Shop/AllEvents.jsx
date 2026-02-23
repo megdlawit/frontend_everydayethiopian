@@ -7,7 +7,7 @@ import { addTocart } from "../../redux/actions/cart";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import Loader from "../Layout/Loader";
 import { Button, Modal, Input, createTheme, ThemeProvider } from "@material-ui/core";
-import api from "../../utils/api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import Toast from "../../components/Toast"; 
 import Pagination from "../Pagination";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import api from "../../utils/api";
+import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { loadDeliveryUser } from "../../redux/actions/delivery";
@@ -54,12 +54,12 @@ const DeliveryDashboardPage = () => {
 
       const fetchData = async () => {
         try {
-          const { data } = await api.get(`${server}/delivery/dashboard`, {
+          const { data } = await axios.get(`${server}/delivery/dashboard`, {
             withCredentials: true, // Use cookies instead of localStorage token
           });
           setCreditBalance(data.delivery?.creditBalance || 0);
 
-          const ordersResponse = await api.get(`${server}/delivery/assigned-orders`, {
+          const ordersResponse = await axios.get(`${server}/delivery/assigned-orders`, {
             withCredentials: true, // Use cookies instead of localStorage token
           });
           const sortedOrders = (ordersResponse.data.assignedOrders || []).sort(
