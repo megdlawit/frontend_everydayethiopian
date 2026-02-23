@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/api";
 import { server } from "../../server";
 
 // create category
@@ -8,15 +8,20 @@ export const createCategory = (data) => async (dispatch) => {
       type: "categoryCreateRequest",
     });
 
-    const { data: responseData } = await axios.post(`${server}/category/create-category`, data);
+    const res = await api.post(`${server}/category/create-category`, data);
+    if (res.error) {
+      dispatch({ type: "categoryCreateFail", payload: res.error.message || res.error });
+      return;
+    }
+
     dispatch({
       type: "categoryCreateSuccess",
-      payload: responseData.category,
+      payload: res.data.category,
     });
   } catch (error) {
     dispatch({
       type: "categoryCreateFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -26,16 +31,21 @@ export const createCategory = (data) => async (dispatch) => {
 export const getAllCategories = () => async (dispatch, getState) => {
   try {
     const { category } = getState();
-    if (category.categories.length > 0) {
+    if ((category.categories || []).length > 0) {
       console.log("Categories already loaded, skipping fetch");
       return;
     }
     console.log("getAllCategories dispatched");
     dispatch({ type: "getAllCategoriesRequest" });
-    const { data } = await axios.get(`${server}/category/get-all-categories`);
+    const res = await api.get(`${server}/category/get-all-categories`);
+    if (res.error) {
+      dispatch({ type: "getAllCategoriesFailed", payload: res.error.message || res.error });
+      return;
+    }
+
     dispatch({
       type: "getAllCategoriesSuccess",
-      payload: data.categories,
+      payload: res.data.categories || [],
     });
   } catch (error) {
     dispatch({
@@ -51,21 +61,20 @@ export const deleteCategory = (id) => async (dispatch) => {
       type: "deleteCategoryRequest",
     });
 
-    const { data } = await axios.delete(
-      `${server}/category/delete-category/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await api.delete(`${server}/category/delete-category/${id}`, { withCredentials: true });
+    if (res.error) {
+      dispatch({ type: "deleteCategoryFailed", payload: res.error.message || res.error });
+      return;
+    }
 
     dispatch({
       type: "deleteCategorySuccess",
-      payload: data.message,
+      payload: res.data.message,
     });
   } catch (error) {
     dispatch({
       type: "deleteCategoryFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -82,17 +91,15 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
 
     console.log('Sending update request with data:', categoryData);
 
-    const { data } = await axios.put(
-      `${server}/category/update-category/${id}`,
-      categoryData,
-      config
-    );
-
-    console.log('Received response:', data);
+    const res = await api.put(`${server}/category/update-category/${id}`, categoryData, config);
+    if (res.error) {
+      dispatch({ type: "updateCategoryFailed", payload: res.error.message || res.error });
+      return;
+    }
 
     dispatch({
       type: "updateCategorySuccess",
-      payload: data.category,
+      payload: res.data.category,
     });
   } catch (error) {
     console.error('Error in updateCategory action:', error);
@@ -110,15 +117,20 @@ export const getCategoryById = (id) => async (dispatch) => {
       type: "getCategoryByIdRequest",
     });
 
-    const { data } = await axios.get(`${server}/category/get-category/${id}`);
+    const res = await api.get(`${server}/category/get-category/${id}`);
+    if (res.error) {
+      dispatch({ type: "getCategoryByIdFailed", payload: res.error.message || res.error });
+      return;
+    }
+
     dispatch({
       type: "getCategoryByIdSuccess",
-      payload: data.category,
+      payload: res.data.category,
     });
   } catch (error) {
     dispatch({
       type: "getCategoryByIdFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

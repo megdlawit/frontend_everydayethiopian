@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { getAllEventsShop } from "../../redux/actions/event";
 import { server, backend_url } from "../../server";
-import axios from "axios";
+import api from "../../utils/api";
 import Footer from "../../components/Layout/Footer";
 import ProductCard from "../../components/Route/ProductCard/ProductCard";
 import EventCard from "../../components/Events/EventCard";
@@ -31,12 +31,16 @@ const PremiumShopPreview = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const shopResponse = await axios.get(`${server}/shop/get-shop-info/${id}`);
-        setShopData(shopResponse.data.shop);
+        const shopResponse = await api.get(`${server}/shop/get-shop-info/${id}`);
+        if (shopResponse.error) {
+          console.error("Error fetching shop data:", shopResponse.error);
+        } else {
+          setShopData(shopResponse.data?.shop ?? {});
+        }
         dispatch(getAllProductsShop(id));
         dispatch(getAllEventsShop(id));
       } catch (error) {
-        console.error("Error fetching shop data:", error);
+        console.error("Unexpected error fetching shop data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -44,7 +48,8 @@ const PremiumShopPreview = () => {
     fetchData();
   }, [dispatch, id]);
 
-  const allReviews = products && products.map((product) => product.reviews).flat();
+  const safeProducts = products || [];
+  const allReviews = safeProducts.flatMap((product) => product.reviews || []);
 
   const handleShare = () => {
     const url = `${window.location.origin}/shop/premiumpreview/${id}`;
@@ -168,8 +173,8 @@ const PremiumShopPreview = () => {
           Shop Our Collection
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products && products.length > 0 ? (
-            products.map((product) => (
+          {(safeProducts.length > 0) ? (
+            safeProducts.map((product) => (
               <ProductCard key={product._id} data={product} isShop={true} />
             ))
           ) : (
